@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مینی‌اپ خبرگزاری میزان</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased pb-20">
+
+    <!-- هدر اختصاصی -->
+    <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex justify-between items-center">
+        <h1 class="text-sm font-bold text-emerald-400">خبرگزاری میزان | مینی‌اپ اختصاصی</h1>
+        <span class="flex items-center gap-1.5 text-[10px] bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> آنلاین
+        </span>
+    </header>
+
+    <!-- منوی دسته‌بندی‌ها -->
+    <nav class="flex gap-2 overflow-x-auto px-4 py-3 bg-slate-950/40 border-b border-slate-800/60 no-scrollbar">
+        <button onclick="changeCategory('home', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-emerald-600 text-white whitespace-nowrap transition-all">صفحه نخست</button>
+        <button onclick="changeCategory('judicial', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">قضایی</button>
+        <button onclick="changeCategory('humanRights', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">حقوق بشر</button>
+        <button onclick="changeCategory('legalMag', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">مجله حقوقی</button>
+        <button onclick="changeCategory('politics', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">سیاست</button>
+        <button onclick="changeCategory('society', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">جامعه</button>
+        <button onclick="changeCategory('economy', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">اقتصاد</button>
+        <button onclick="changeCategory('sports', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">ورزشی</button>
+        <button onclick="changeCategory('world', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">جهان</button>
+        <button onclick="changeCategory('photos', this)" class="cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all">عکس</button>
+    </nav>
+
+    <!-- لیست اخبار -->
+    <main id="news-container" class="max-w-xl mx-auto p-4 space-y-4">
+        <div class="text-center py-20 text-slate-400">در حال بارگذاری اخبار از سرور میزان...</div>
+    </main>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        let currentCategory = 'home';
+
+        const rssFeeds = {
+            home: 'https://www.mizanonline.ir/fa/rss/allnews',
+            judicial: 'https://www.mizanonline.ir/fa/rss/17',
+            humanRights: 'https://www.mizanonline.ir/fa/rss/7',
+            legalMag: 'https://www.mizanonline.ir/fa/rss/16',
+            politics: 'https://www.mizanonline.ir/fa/rss/10',
+            society: 'https://www.mizanonline.ir/fa/rss/9',
+            economy: 'https://www.mizanonline.ir/fa/rss/11',
+            sports: 'https://www.mizanonline.ir/fa/rss/13',
+            world: 'https://www.mizanonline.ir/fa/rss/14',
+            photos: 'https://www.mizanonline.ir/fa/rss/4'
+        };
+
+        async function fetchNews(category = 'home') {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '<div class="text-center py-20 text-slate-500 animate-pulse">در حال دریافت بروزرسانی لحظه‌ای...</div>';
+
+            const targetUrl = rssFeeds[category] || rssFeeds.home;
+            const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
+
+            try {
+                const response = await fetch(proxyUrl);
+                const text = await response.text();
+                const parser = new window.DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const items = xml.querySelectorAll('item');
+
+                let newsList = [];
+                items.forEach(el => {
+                    const title = el.querySelector('title')?.textContent || '';
+                    const link = el.querySelector('link')?.textContent || '';
+                    const pubDate = el.querySelector('pubDate')?.textContent || '';
+                    const description = el.querySelector('description')?.textContent || '';
+
+                    let imageUrl = '';
+                    const enclosure = el.querySelector('enclosure');
+                    if (enclosure) {
+                        imageUrl = enclosure.getAttribute('url');
+                    } else {
+                        const match = description.match(/<img[^>]+src="([^">]+)"/);
+                        if (match) imageUrl = match[1];
+                    }
+
+                    newsList.push({
+                        title,
+                        link,
+                        pubDate,
+                        contentSnippet: description.replace(/<[^>]*>?/gm, '').substring(0, 140),
+                        imageUrl
+                    });
+                });
+
+                if (newsList.length > 0) {
+                    renderNews(newsList);
+                } else {
+                    container.innerHTML = '<div class="text-center py-20 text-red-400">خبری یافت نشد.</div>';
+                }
+            } catch (err) {
+                container.innerHTML = '<div class="text-center py-20 text-red-400">خطا در ارتباط با سرور میزان.</div>';
+            }
+        }
+
+        function renderNews(items) {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden shadow-lg hover:border-emerald-500/50 transition-all';
+                
+                card.innerHTML = `
+                    ${item.imageUrl ? `<img src="${item.imageUrl}" class="w-full h-48 object-cover" alt="تصویر خبر">` : ''}
+                    <div class="p-4">
+                        <h2 class="text-base font-bold text-slate-100 mb-2 leading-snug">${item.title}</h2>
+                        <p class="text-xs text-slate-400 mb-4 line-clamp-2">${item.contentSnippet}</p>
+                        <div class="flex justify-between items-center pt-2 border-t border-slate-700/40">
+                            <span class="text-[10px] text-slate-500">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR') : ''}</span>
+                            <a href="${item.link}" target="_blank" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-xl font-medium transition-colors">مشاهده کامل خبر</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function changeCategory(category, buttonElement) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = 'cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-800 text-slate-300 whitespace-nowrap transition-all';
+            });
+            buttonElement.className = 'cat-btn px-4 py-1.5 rounded-full text-xs font-medium bg-emerald-600 text-white whitespace-nowrap transition-all';
+            fetchNews(category);
+        }
+
+        fetchNews('home');
+
+        // آپدیت خودکار لحظه‌ای هر ۶۰ ثانیه
+        setInterval(() => {
+            fetchNews(currentCategory);
+        }, 60000);
+    </script>
+</body>
+</html>
