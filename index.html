@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مینی‌اپ اختصاصی خبرگزاری میزان</title>
+    <title>خبرگزاری میزان | مینی‌اپ اختصاصی</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
@@ -12,61 +12,66 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeIn 0.35s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
     </style>
 </head>
-<body class="bg-[#05070a] text-slate-100 antialiased pb-28 selection:bg-emerald-500 selection:text-white">
+<body class="bg-[#0b0f19] text-slate-100 antialiased pb-28 selection:bg-emerald-500 selection:text-white">
 
-    <!-- هدر گرافیکی و لوکس میزان -->
-    <header class="sticky top-0 z-50 bg-[#05070a]/95 backdrop-blur-2xl border-b border-emerald-500/20 px-4 py-3 flex justify-between items-center shadow-2xl">
+    <!-- هدر اختصاصی و لوگوی خبرگزاری میزان -->
+    <header class="sticky top-0 z-50 bg-[#070a14]/95 backdrop-blur-2xl border-b border-emerald-500/20 px-4 py-3 flex justify-between items-center shadow-2xl">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center font-black text-white shadow-xl shadow-emerald-950 text-lg border border-emerald-400/30">م</div>
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-teal-400 flex items-center justify-center font-black text-white shadow-xl shadow-emerald-950 text-lg border border-emerald-400/30">م</div>
             <div>
                 <h1 class="text-xs font-black tracking-wider text-emerald-400">خبرگزاری میزان</h1>
-                <p class="text-[9px] text-slate-400 font-medium">مینی‌اپ هوشمند و فوق‌سریع</p>
+                <p class="text-[9px] text-slate-400 font-medium">پایگاه خبری حقوقی و قضایی</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <span class="flex items-center gap-1.5 text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/30 shadow-inner">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> بروزرسانی لحظه‌ای
-            </span>
+            <button onclick="manualRefresh()" class="flex items-center gap-1.5 text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 active:scale-95 transition-all shadow-inner cursor-pointer">
+                <span>🔄</span> بروزرسانی
+            </button>
         </div>
     </header>
 
-    <!-- منوی افقی جامع با تمام دسته‌بندی‌ها -->
-    <nav class="flex gap-2 overflow-x-auto px-4 py-3 bg-[#090e17]/95 backdrop-blur-xl border-b border-slate-800/80 no-scrollbar sticky top-[65px] z-40 shadow-xl">
-        <button onclick="switchTab('news', 'home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-950">صفحه نخست</button>
-        <button onclick="switchTab('news', 'all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">کل اخبار</button>
-        <button onclick="switchTab('news', 'judicial', this)" id="tab-judicial" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">قضایی</button>
-        <button onclick="switchTab('news', 'humanRights', this)" id="tab-humanRights" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">حقوق بشر</button>
-        <button onclick="switchTab('news', 'legalMag', this)" id="tab-legalMag" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">مجله حقوقی</button>
-        <button onclick="switchTab('news', 'politics', this)" id="tab-politics" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">سیاست</button>
-        <button onclick="switchTab('news', 'society', this)" id="tab-society" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جامعه</button>
-        <button onclick="switchTab('news', 'economy', this)" id="tab-economy" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اقتصاد</button>
-        <button onclick="switchTab('news', 'culture', this)" id="tab-culture" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">فرهنگی</button>
-        <button onclick="switchTab('news', 'sports', this)" id="tab-sports" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">ورزشی</button>
-        <button onclick="switchTab('news', 'world', this)" id="tab-world" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جهان</button>
-        <button onclick="switchTab('news', 'multimedia', this)" id="tab-multimedia" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">چندرسانه</button>
-        <button onclick="switchTab('news', 'photos', this)" id="tab-photos" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">عکس</button>
-        <button onclick="switchTab('news', 'infographic', this)" id="tab-infographic" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اینفوگرافیک</button>
-        <button onclick="switchTab('lawyer', null, this)" id="tab-lawyer" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-950 flex items-center gap-1.5">
+    <!-- منوی افقی تب‌ها -->
+    <nav class="flex gap-2 overflow-x-auto px-4 py-3 bg-[#0d1322]/95 backdrop-blur-xl border-b border-slate-800/80 no-scrollbar sticky top-[65px] z-40 shadow-xl">
+        <button onclick="switchTab('home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-950">صفحه نخست</button>
+        <button onclick="switchTab('all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">کل اخبار</button>
+        <button onclick="switchTab('judicial', this)" id="tab-judicial" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">قضایی</button>
+        <button onclick="switchTab('humanRights', this)" id="tab-humanRights" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">حقوق بشر</button>
+        <button onclick="switchTab('legalMag', this)" id="tab-legalMag" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">مجله حقوقی</button>
+        <button onclick="switchTab('politics', this)" id="tab-politics" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">سیاست</button>
+        <button onclick="switchTab('society', this)" id="tab-society" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جامعه</button>
+        <button onclick="switchTab('economy', this)" id="tab-economy" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اقتصاد</button>
+        <button onclick="switchTab('culture', this)" id="tab-culture" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">فرهنگی</button>
+        <button onclick="switchTab('sports', this)" id="tab-sports" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">ورزشی</button>
+        <button onclick="switchTab('world', this)" id="tab-world" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جهان</button>
+        <button onclick="switchTab('multimedia', this)" id="tab-multimedia" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">چندرسانه</button>
+        <button onclick="switchTab('photos', this)" id="tab-photos" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">عکس</button>
+        <button onclick="switchTab('infographic', this)" id="tab-infographic" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اینفوگرافیک</button>
+        <button onclick="switchTab('lawyer', this)" id="tab-lawyer" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-950 flex items-center gap-1.5">
             <span>⚖️</span> وکیل آنلاین
         </button>
     </nav>
 
     <!-- محتوای اصلی -->
     <main class="max-w-xl mx-auto p-4">
-        <!-- بخش اخبار -->
+        <!-- بخش نمایش اخبار -->
         <div id="news-section" class="space-y-4 animate-fade-in">
             <div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3">
                 <div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-xs font-medium text-emerald-400">در حال دریافت پرسرعت اخبار...</p>
+                <p class="text-xs font-medium text-emerald-400">بارگذاری پرسرعت اخبار میزان...</p>
             </div>
         </div>
 
-        <!-- بخش وکیل آنلاین با سوال و جواب‌های کامل -->
+        <!-- لودینگ اسکرول بی‌نهایت -->
+        <div id="infinite-loader" class="hidden text-center py-6">
+            <div class="inline-block w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+
+        <!-- بخش وکیل آنلاین -->
         <div id="lawyer-section" class="hidden space-y-6 animate-fade-in">
-            <div class="bg-gradient-to-br from-slate-900 via-[#090e17] to-slate-950 border border-amber-500/30 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="bg-gradient-to-br from-slate-900 via-[#0d1322] to-slate-950 border border-amber-500/30 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3 relative z-10">
                     <span class="text-2xl">⚖️</span>
@@ -104,59 +109,17 @@
                     <span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)
                 </h3>
                 
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all shadow-lg">
-                    <div class="flex items-start gap-2">
-                        <span class="text-amber-400 font-bold text-xs">❓ سوال:</span>
-                        <h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4>
-                    </div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60">
-                        <span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت قانونی ۱۰ روزه، در صورت عدم پرداخت وجه چک یا عدم معرفی مال، تقاضای جلب سیار صادر می‌گردد.</p>
-                    </div>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 shadow-lg">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت قانونی ۱۰ روزه، در صورت عدم پرداخت وجه چک یا عدم معرفی مال، تقاضای جلب سیار صادر می‌گردد.</p></div>
                 </div>
-
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all shadow-lg">
-                    <div class="flex items-start gap-2">
-                        <span class="text-amber-400 font-bold text-xs">❓ سوال:</span>
-                        <h4 class="text-xs font-bold text-slate-100">شرایط تعدیل اقساط مهریه به چه صورت است؟</h4>
-                    </div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60">
-                        <span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">زوج با اثبات عسر و حرج، تغییر وضعیت مالی یا تورم شدید می‌تواند با تقدیم دادخواست به دادگاه صادرکننده حکم قطعی، تقاضای تقسیط مجدد یا افزایش فاصله زمانی پرداخت سکه‌ها را نماید.</p>
-                    </div>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 shadow-lg">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">شرایط تعدیل اقساط مهریه به چه صورت است؟</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">زوج با اثبات عسر و حرج، تغییر وضعیت مالی یا تورم شدید می‌تواند با تقدیم دادخواست به دادگاه صادرکننده حکم قطعی، تقاضای تقسیط مجدد نماید.</p></div>
                 </div>
-
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all shadow-lg">
-                    <div class="flex items-start gap-2">
-                        <span class="text-amber-400 font-bold text-xs">❓ سوال:</span>
-                        <h4 class="text-xs font-bold text-slate-100">مراحل قانونی شکایت از انتشار تصاویر شخصی در فضای مجازی</h4>
-                    </div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60">
-                        <span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">جرم نشر اکاذیب و هتک حیثیت در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت با به همراه داشتن مستندات از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all shadow-lg">
-                    <div class="flex items-start gap-2">
-                        <span class="text-amber-400 font-bold text-xs">❓ سوال:</span>
-                        <h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4>
-                    </div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60">
-                        <span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند پس از درخواست طلاق یا به صورت مستقل، بابت کارهایی که در خانه شوهر به دستور وی و بدون قصد تبرع انجام داده، تقاضای کارشناسی و دریافت اجرت‌المثل نماید.</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all shadow-lg">
-                    <div class="flex items-start gap-2">
-                        <span class="text-amber-400 font-bold text-xs">❓ سوال:</span>
-                        <h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4>
-                    </div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60">
-                        <span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">بر اساس رویه قضایی جدید، تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p>
-                    </div>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 shadow-lg">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">مراحل قانونی شکایت از انتشار تصاویر شخصی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/60"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">جرم نشر اکاذیب و هتک حیثیت در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
                 </div>
             </div>
         </div>
@@ -166,64 +129,134 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        let currentCategory = 'home';
-        let currentMode = 'news';
+        let currentTab = 'home';
+        let allNewsCache = {}; // کش محلی برای جلوگیری از لودینگ مجدد تب‌ها
+        let displayedCount = 10; // نمایش اولیه ۱۰ خبر در هر تب
+        let currentItems = [];
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        async function fetchNews(category = 'home') {
+        async function loadTab(tab, forceRefresh = false) {
+            currentTab = tab;
             const container = document.getElementById('news-section');
-            if (currentMode === 'news') {
-                container.innerHTML = `<div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3">
-                    <div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-xs font-medium text-emerald-400">در حال دریافت لحظه‌ای اخبار...</p>
-                </div>`;
+            const lawyerSec = document.getElementById('lawyer-section');
+
+            if (tab === 'lawyer') {
+                container.classList.add('hidden');
+                lawyerSec.classList.remove('hidden');
+                return;
+            } else {
+                lawyerSec.classList.add('hidden');
+                container.classList.remove('hidden');
             }
 
+            // اگر داده در کش باشد و رفرش اجباری نباشد، بدون لودینگ صفحه فوری نمایش داده می‌شود (سرعت فوق‌العاده)
+            if (!forceRefresh && allNewsCache[tab] && allNewsCache[tab].length > 0) {
+                currentItems = allNewsCache[tab];
+                displayedCount = 10;
+                renderContent();
+                return;
+            }
+
+            container.innerHTML = `<div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3">
+                <div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs font-medium text-emerald-400">در حال دریافت اخبار...</p>
+            </div>`;
+
             try {
-                const response = await fetch(`${SCRIPT_URL}?category=${category}`);
+                const response = await fetch(`${SCRIPT_URL}?category=${tab}`);
                 const data = await response.json();
 
                 if (data.success && data.items.length > 0) {
-                    renderNews(data.items);
+                    allNewsCache[tab] = data.items;
+                    currentItems = data.items;
+                    displayedCount = 10;
+                    renderContent();
                 } else {
-                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">خبری در این بخش یافت نشد.</div>';
+                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">خبری یافت نشد.</div>';
                 }
             } catch (err) {
-                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">
-                    خطا در برقراری ارتباط پرسرعت. در حال تلاش مجدد...
-                </div>`;
-                setTimeout(() => fetchNews(category), 3000);
+                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری. لطفا مجدد تلاش کنید.</div>`;
             }
         }
 
-        function renderNews(items) {
+        function renderContent() {
             const container = document.getElementById('news-section');
             container.innerHTML = '';
 
-            items.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'bg-gradient-to-br from-slate-900/90 to-[#090e17] border border-slate-800/90 rounded-2xl overflow-hidden shadow-2xl hover:border-emerald-500/50 transition-all group animate-fade-in';
-                card.style.animationDelay = `${index * 0.04}s`;
-                
-                card.innerHTML = `
-                    ${item.imageUrl ? `<div class="overflow-hidden h-48 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent z-10"></div><img src="${item.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : ''}
-                    <div class="p-4 relative z-20">
-                        <h2 class="text-sm font-bold text-slate-100 mb-2 leading-relaxed">${item.title}</h2>
-                        <p class="text-[11px] text-slate-400 mb-4 line-clamp-2 leading-relaxed">${item.contentSnippet}</p>
-                        <div class="flex justify-between items-center pt-3 border-t border-slate-800/80">
-                            <span class="text-[10px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
-                            <a href="${item.link}" target="_blank" class="text-[11px] bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-950">مشاهده کامل خبر</a>
+            if (currentTab === 'home') {
+                renderHomeLayout(container, currentItems);
+            } else {
+                renderStandardList(container, currentItems.slice(0, displayedCount));
+            }
+        }
+
+      // استایل اختصاصی صفحه نخست شبیه سایت اصلی خبرگزاری میزان
+        function renderHomeLayout(container, items) {
+            if (items.length === 0) return;
+            const topNews = items[0];
+            const subNews = items.slice(1, 10);
+
+            let html = `
+                <!-- خبر اصلی و سرتیتر سایت -->
+                <div class="bg-gradient-to-br from-slate-900 to-[#0e1626] border border-emerald-500/30 rounded-3xl overflow-hidden shadow-2xl mb-5 group">
+                    ${topNews.imageUrl ? `<div class="overflow-hidden h-56 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div><img src="${topNews.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : ''}
+                    <div class="p-5 relative z-20">
+                        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/30 mb-3 inline-block">خبر ویژه روز</span>
+                        <h2 class="text-base font-black text-slate-100 mb-2 leading-relaxed">${topNews.title}</h2>
+                        <p class="text-xs text-slate-300 mb-4 line-clamp-3 leading-relaxed">${topNews.contentSnippet}</p>
+                        <div class="flex justify-between items-center pt-3 border-t border-slate-800">
+                            <span class="text-[10px] text-slate-400 font-mono">${topNews.pubDate ? new Date(topNews.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+                            <a href="${topNews.link}" target="_blank" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl font-bold transition-all shadow-lg shadow-emerald-950">مشاهده مشروح خبر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-xs font-black text-emerald-400 px-1 border-r-4 border-emerald-500 pr-2">آخرین اخبار و گزارش‌های تصویری</h3>
+            `;
+
+            subNews.forEach((item, index) => {
+                if (index >= displayedCount - 1) return;
+                html += `
+                    <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg hover:border-emerald-500/40 transition-all">
+                        ${item.imageUrl ? `<img src="${item.imageUrl}" class="w-24 h-24 rounded-xl object-cover shrink-0 shadow-md" alt="تصویر">` : ''}
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-slate-100 mb-1.5 leading-snug line-clamp-2">${item.title}</h4>
+                            <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">${item.contentSnippet}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-[9px] text-slate-500">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+                                <a href="${item.link}" target="_blank" class="text-[10px] bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white px-2.5 py-1 rounded-lg transition-colors font-medium">مطالعه</a>
+                            </div>
                         </div>
                     </div>
                 `;
-                container.appendChild(card);
             });
+            html += `</div>`;
+            container.innerHTML = html;
         }
 
-        function switchTab(mode, category, buttonElement) {
-            currentMode = mode;
-            
+        function renderStandardList(container, items) {
+            let html = `<div class="space-y-4">`;
+            items.forEach((item, index) => {
+                html += `
+                    <div class="bg-gradient-to-br from-slate-900/90 to-[#090e17] border border-slate-800/90 rounded-2xl overflow-hidden shadow-xl hover:border-emerald-500/40 transition-all group animate-fade-in">
+                        ${item.imageUrl ? `<div class="overflow-hidden h-44 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent z-10"></div><img src="${item.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : ''}
+                        <div class="p-4 relative z-20">
+                            <h2 class="text-sm font-bold text-slate-100 mb-2 leading-relaxed">${item.title}</h2>
+                            <p class="text-[11px] text-slate-400 mb-4 line-clamp-2 leading-relaxed">${item.contentSnippet}</p>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-800/80">
+                                <span class="text-[10px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+                                <a href="${item.link}" target="_blank" class="text-[11px] bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-950">مشاهده کامل خبر</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function switchTab(tab, buttonElement) {
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if(btn.id === 'tab-lawyer') {
                     btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-950 flex items-center gap-1.5';
@@ -232,25 +265,33 @@
                 }
             });
 
-            if (mode === 'lawyer') {
+            if (tab === 'lawyer') {
                 buttonElement.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 whitespace-nowrap transition-all shadow-xl shadow-amber-950 flex items-center gap-1.5 scale-105';
             } else {
                 buttonElement.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-950 scale-105';
             }
 
-            const newsSec = document.getElementById('news-section');
-            const lawyerSec = document.getElementById('lawyer-section');
-
-            if (mode === 'news') {
-                newsSec.classList.remove('hidden');
-                lawyerSec.classList.add('hidden');
-                currentCategory = category;
-                fetchNews(category);
-            } else {
-                newsSec.classList.add('hidden');
-                lawyerSec.classList.remove('hidden');
-            }
+            loadTab(tab, false);
         }
+
+        function manualRefresh() {
+            allNewsCache = {}; // پاک کردن کش برای گرفتن اخبار جدید از سرور
+            loadTab(currentTab, true);
+        }
+
+        // اسکرول بی‌نهایت برای نمایش خودکار اخبار قدیمی‌تر به هنگام پایین رفتن صفحه
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
+                if (currentTab !== 'lawyer' && currentItems.length > displayedCount) {
+                    document.getElementById('infinite-loader').classList.remove('hidden');
+                    setTimeout(() => {
+                        displayedCount += 5; // اضافه شدن ۵ خبر جدید با هر بار اسکرول
+                        renderContent();
+                        document.getElementById('infinite-loader').classList.add('hidden');
+                    }, 400);
+                }
+            }
+        });
 
         function submitLawyerQuery(e) {
             e.preventDefault();
@@ -268,15 +309,8 @@
             }, 4000);
         }
 
-        // بارگذاری اولیه صفحه نخست
-        fetchNews('home');
-
-        // تازه‌سازی لحظه‌ای خودکار اخبار هر ۶۰ ثانیه
-        setInterval(() => {
-            if (currentMode === 'news') {
-                fetchNews(currentCategory);
-            }
-        }, 60000);
+        // اجرای اولیه
+        loadTab('home', false);
     </script>
 </body>
 </html>
