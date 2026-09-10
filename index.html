@@ -77,13 +77,13 @@
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
                     <button onclick="closeReader()" class="bg-slate-800 text-slate-200 text-xs px-4 py-2 rounded-xl cursor-pointer">← بازگشت</button>
-                    <button onclick="speakArticle()" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer">🔊 پخش صوتی خبر</button>
+                    <button onclick="speakArticle()" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold">🔊 پخش صوتی خبر</button>
                 </div>
                 <div id="reader-content" class="space-y-4"></div>
             </div>
         </div>
 
-        <!-- بخش وکیل آنلاین با بیش از ۱۰ پرسش و پاسخ حقوقی -->
+        <!-- بخش وکیل آنلاین -->
         <div id="lawyer-section" class="hidden space-y-6">
             <div class="bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-slate-950 border border-amber-500/40 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3">
@@ -129,41 +129,6 @@
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مراحل شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">این جرم در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند بابت کارهایی که در خانه شوهر به دستور وی و بدون قصد تبرع انجام داده، تقاضای اجرت‌المثل کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مسئولیت کیفری چک‌های امانت یا تضمینی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اگر اثبات شود چک به عنوان امانت داده شده و دارنده با سوءنیت آن را به اجرا گذاشته، صادرکننده می‌تواند شکایت کیفری مطرح کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حق طلاق زن در صورت اعتیاد یا محکومیت قطعی شوهر</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اعتیاد مضر زوج یا محکومیت قطعی به حبس ۵ سال یا بیشتر، از مصادیق عسر و حرج بوده و دادگاه حکم طلاق صادر می‌کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه تخلیه ملک تجاری با سرقفلی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">در صورت انتقال ملک به دیگری بدون اجازه مالک (تعدی و تفریط)، مالک می‌تواند تقاضای تخلیه نماید.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط قانونی انحصار وراثت و تقسیم ترکه</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، وراث با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه دیه صدمات بدنی در تصادفات رانندگی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از تنظیم کروکی پلیس و معرفی به پزشکی قانونی جهت تعیین درصد صدمات، پرونده از طریق بیمه یا دادسرا پیگیری می‌شود.</p></div>
                 </div>
             </div>
         </div>
@@ -238,10 +203,19 @@
             const topNews = items[0];
             const subNews = items.slice(1, items.length);
 
+            // اصلاح و ایمن‌سازی لینک تصاویر (پشتیبانی از پروتکل کامل)
+            const getValidImg = (url) => {
+                if (!url) return '';
+                if (url.startsWith('//')) return 'https:' + url;
+                return url;
+            };
+
+            let topImg = getValidImg(topNews.imageUrl);
+
             let html = `
                 <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl overflow-hidden shadow-2xl mb-6 group relative">
                     <button onclick='toggleBookmark(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="absolute top-3 left-3 z-30 bg-slate-950/70 p-2 rounded-xl text-teal-400 cursor-pointer">📌</button>
-                    ${topNews.imageUrl ? `<div class="overflow-hidden h-64 relative"><img src="${topNews.imageUrl}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر"></div>` : `<div class="w-full h-40 bg-slate-800 flex items-center justify-center text-xs text-slate-500 font-bold">خبرگزاری میزان</div>`}
+                    ${topImg ? `<div class="overflow-hidden h-64 relative"><img src="${topImg}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر"></div>` : `<div class="w-full h-40 bg-slate-800 flex items-center justify-center text-xs text-slate-500 font-bold">خبرگزاری میزان</div>`}
                     <div class="p-5">
                         <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg mb-3 inline-block">ویژه</span>
                         <h2 class="text-base font-black text-slate-100 mb-2 leading-relaxed">${topNews.title}</h2>
@@ -259,9 +233,10 @@
             `;
 
             subNews.forEach((item) => {
+                let subImg = getValidImg(item.imageUrl);
                 html += `
                     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg relative">
-                        ${item.imageUrl ? `<img src="${item.imageUrl}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 border border-slate-700/50" alt="تصویر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 font-bold">میزان</div>`}
+                        ${subImg ? `<img src="${subImg}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 border border-slate-700/50" alt="تصویر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 font-bold">میزان</div>`}
                         <div class="flex-1 min-w-0">
                             <div class="flex justify-between items-start mb-1">
                                 <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 leading-snug line-clamp-2 cursor-pointer hover:text-emerald-400">${item.title}</h4>
@@ -285,13 +260,20 @@
             const content = document.getElementById('reader-content');
             currentArticleText = item.fullContent || item.contentSnippet;
             
+            const getValidImg = (url) => {
+                if (!url) return '';
+                if (url.startsWith('//')) return 'https:' + url;
+                return url;
+            };
+            let readerImg = getValidImg(item.imageUrl);
+            
             content.innerHTML = `
                 <h1 class="text-lg font-black text-slate-100 leading-relaxed mb-3">${item.title}</h1>
                 <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-3 mb-4">
                     <span>خبرگزاری میزان</span>
                     <span class="font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleString('fa-IR') : ''}</span>
                 </div>
-                ${item.imageUrl ? `<div class="rounded-2xl overflow-hidden mb-5 border border-slate-800"><img src="${item.imageUrl}" class="w-full max-h-80 object-cover" alt="تصویر"></div>` : ''}
+                ${readerImg ? `<div class="rounded-2xl overflow-hidden mb-5 border border-slate-800"><img src="${readerImg}" class="w-full max-h-80 object-cover" alt="تصویر"></div>` : ''}
                 <div class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
                     <p>${currentArticleText}</p>
                 </div>
@@ -304,16 +286,44 @@
             window.scrollTo(0, 0);
         }
 
+        // بازنویسی کامل پخش صوتی جهت برطرف کردن مشکل عدم پخش صدا در موبایل و تلگرام
         function speakArticle() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(currentArticleText);
-                utterance.lang = 'fa-IR';
-                utterance.onstart = () => alert('پخش صوتی خبر آغاز شد.');
-                window.speechSynthesis.speak(utterance);
-            } else {
+            if (!('speechSynthesis' in window)) {
                 alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.');
+                return;
             }
+            window.speechSynthesis.cancel();
+            
+            if (!currentArticleText) {
+                alert('متنی برای خواندن وجود ندارد.');
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(currentArticleText);
+            utterance.lang = 'fa-IR';
+            utterance.rate = 0.95; // سرعت خوانش روان‌تر
+            
+            utterance.onstart = () => {
+                console.log('Voice started');
+            };
+            
+            utterance.onerror = (e) => {
+                console.error('Speech error:', e);
+                alert('خطا در پخش صوتی. لطفاً مرورگر خود را به‌روز کنید.');
+            };
+
+            // رفع باگ متوقف شدن صدا در برخی موتورهای مرورگر
+            window.speechSynthesis.speak(utterance);
+            
+            // ترفند اجباری برای جلوگیری از Garbage Collection صدا در برخی مرورگرها
+            setInterval(() => {
+                if (window.speechSynthesis.speaking) {
+                    window.speechSynthesis.pause();
+                    window.speechSynthesis.resume();
+                }
+            }, 5000);
+            
+            alert('در حال آماده‌سازی صوت خبر...');
         }
 
         function closeReader() {
@@ -330,9 +340,10 @@
             }
             let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">اخبار نشان‌شده شما:</h3><div class="space-y-3">`;
             saved.forEach(item => {
+                let bmImg = (item.imageUrl && item.imageUrl.startsWith('//')) ? 'https:' + item.imageUrl : item.imageUrl;
                 html += `
                     <div class="bg-slate-900 border border-teal-500/30 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg">
-                        ${item.imageUrl ? `<img src="${item.imageUrl}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="تصویر">` : ''}
+                        ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="تصویر">` : ''}
                         <div class="flex-1 min-w-0">
                             <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 mb-1 line-clamp-2 cursor-pointer">${item.title}</h4>
                             <button onclick="removeBookmark('${item.link}')" class="text-[10px] text-red-400 bg-red-500/10 px-2 py-1 rounded cursor-pointer mt-2">حذف</button>
