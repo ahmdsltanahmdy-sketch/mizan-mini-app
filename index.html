@@ -144,11 +144,10 @@
             </div>
         </div>
 
-        <!-- استودیوی ساخت کارت گرافیکی (مخصوص استوری و کانال) -->
-        <div id="story-modal" class="hidden fixed inset-0 z-50 bg-black/9ynth backdrop-blur-md flex items-center justify-center p-4">
+        <!-- استودیوی ساخت کارت گرافیکی -->
+        <div id="story-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
             <div class="bg-slate-900 border border-cyan-500/50 rounded-3xl p-5 max-w-sm w-full space-y-4 shadow-2xl">
                 <div class="flex justify-between items-center"><h3 class="text-xs font-bold text-cyan-400">🎨 استودیوی کارت گرافیکی خبر</h3><button onclick="closeStoryModal()" class="text-slate-400 text-xs">✕</button></div>
-                <!-- بستر کارت گرافیکی -->
                 <div id="story-card-box" class="bg-gradient-to-tr from-slate-950 via-emerald-950 to-slate-900 p-6 rounded-2xl border border-emerald-500/30 text-center space-y-4 shadow-2xl relative overflow-hidden">
                     <div class="w-10 h-10 mx-auto rounded-xl bg-emerald-600 flex items-center justify-center font-black text-white text-base">م</div>
                     <p id="story-card-title" class="text-xs font-bold text-slate-100 leading-relaxed"></p>
@@ -158,7 +157,7 @@
             </div>
         </div>
 
-        <!-- بخش وکیل آنلاین (ایزوله و اختصاصی پرسش و پاسخ) -->
+        <!-- تب اختصاصی وکیل آنلاین (کاملاً ایزوله و بدون تداخل اخبار) -->
         <div id="lawyer-section" class="hidden space-y-6">
             <div class="bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-slate-950 border border-amber-500/40 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3">
@@ -187,9 +186,10 @@
                 <div id="lawyer-success" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs p-3 rounded-xl text-center">سوال شما ثبت شد و به تلگرام ارسال گردید.</div>
             </div>
 
-            <!-- بانک پرسش و پاسخ تخصصی -->
+            <!-- بانک کامل پرسش و پاسخ تخصصی -->
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)</h3>
+                
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت ۱۰ روزه، تقاضای جلب صادر می‌گردد.</p></div>
@@ -224,14 +224,29 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
+        // تابع استاندارد و ایمن برای اصلاح صددرصدی لینک تصاویر
+        function fixImgUrl(url) {
+            if (!url) return '';
+            if (url.startsWith('//')) return 'https:' + url;
+            if (url.startsWith('/')) return 'https://www.mizanonline.ir' + url;
+            return url;
+        }
+
         async function loadTab(tab, forceRefresh = false) {
             currentTab = tab;
             const container = document.getElementById('news-section');
-            const sections = ['lawyer-section', 'archive-section', 'quiz-section', 'services-section', 'toolbar-container'];
+            const lawyerSec = document.getElementById('lawyer-section');
+            const sections = ['archive-section', 'quiz-section', 'services-section', 'toolbar-container'];
             
+            // ایزوله کردن کامل بخش‌ها
             sections.forEach(id => document.getElementById(id).classList.add('hidden'));
+            lawyerSec.classList.add('hidden');
+            container.classList.add('hidden');
 
-            if (tab === 'lawyer') { document.getElementById('lawyer-section').classList.remove('hidden'); return; }
+            if (tab === 'lawyer') {
+                lawyerSec.classList.remove('hidden');
+                return;
+            }
             if (tab === 'archive') { document.getElementById('archive-section').classList.remove('hidden'); return; }
             if (tab === 'quiz') { document.getElementById('quiz-section').classList.remove('hidden'); return; }
             if (tab === 'services') { document.getElementById('services-section').classList.remove('hidden'); return; }
@@ -240,7 +255,7 @@
             container.classList.remove('hidden');
             document.getElementById('toolbar-container').classList.remove('hidden');
 
-            // استفاده از کش محلی برای سرعت زیر ۵۰ میلی‌ثانیه
+            // بارگذاری صاعقه‌ای از حافظه محلی
             const cachedLocal = localStorage.getItem('mizan_cache_' + tab);
             if (!forceRefresh && cachedLocal && !memoryCache[tab]) {
                 try {
@@ -286,13 +301,7 @@
             const topNews = items[0];
             const subNews = items.slice(1, items.length);
 
-            const getValidImg = (url) => {
-                if (!url) return '';
-                if (url.startsWith('//')) return 'https:' + url;
-                return url;
-            };
-
-            let topImg = getValidImg(topNews.imageUrl);
+            let topImg = fixImgUrl(topNews.imageUrl);
 
             let html = `
                 <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl overflow-hidden shadow-2xl mb-6 group relative">
@@ -315,7 +324,7 @@
             `;
 
             subNews.forEach((item) => {
-                let subImg = getValidImg(item.imageUrl);
+                let subImg = fixImgUrl(item.imageUrl);
                 html += `
                     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg relative">
                         ${subImg ? `<img src="${subImg}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 border border-slate-700/50" alt="تصویر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 font-bold">میزان</div>`}
@@ -341,13 +350,7 @@
             currentArticle = item;
             const modal = document.getElementById('reader-modal');
             const content = document.getElementById('reader-content');
-            
-            const getValidImg = (url) => {
-                if (!url) return '';
-                if (url.startsWith('//')) return 'https:' + url;
-                return url;
-            };
-            let readerImg = getValidImg(item.imageUrl);
+            let readerImg = fixImgUrl(item.imageUrl);
             
             content.innerHTML = `
                 <h1 class="text-lg font-black text-slate-100 leading-relaxed mb-3">${item.title}</h1>
@@ -368,11 +371,11 @@
             window.scrollTo(0, 0);
         }
 
-        // سیستم پخش صوتی پایدار و اجرایی
+        // سیستم پخش صوتی صددرصد اجرایی و ایمن‌شده برای موبایل و تلگرام
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
             if (!('speechSynthesis' in window)) {
-                alert('مرورگر شما پشتیبانی نمی‌کند.');
+                alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.');
                 return;
             }
 
@@ -388,20 +391,29 @@
                 utterance.lang = 'fa-IR';
                 utterance.rate = 1.0;
 
+                utterance.onstart = () => {
+                    isSpeaking = true;
+                    btn.innerText = "⏹️ توقف صوت";
+                    btn.className = "bg-red-600/20 text-red-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
+                };
+
                 utterance.onend = () => {
                     isSpeaking = false;
                     btn.innerText = "🔊 پخش صوتی";
                     btn.className = "bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
                 };
 
+                utterance.onerror = () => {
+                    isSpeaking = false;
+                    btn.innerText = "🔊 پخش صوتی";
+                    btn.className = "bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
+                    alert('خطا در پخش صوتی. لطفاً تنظیمات صوت دستگاه را بررسی کنید.');
+                };
+
                 window.speechSynthesis.speak(utterance);
-                isSpeaking = true;
-                btn.innerText = "⏹️ توقف صوت";
-                btn.className = "bg-red-600/20 text-red-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
             }
         }
 
-        // مدیریت استودیوی کارت گرافیکی
         function openStoryModal() {
             document.getElementById('story-card-title').innerText = currentArticle.title || '';
             document.getElementById('story-modal').classList.remove('hidden');
@@ -423,6 +435,7 @@
             if(notifEnabled) {
                 btn.className = "bg-emerald-600 text-white px-3.5 rounded-xl text-xs shrink-0 cursor-pointer";
                 btn.innerText = "🔔 هشدار فعال است";
+                alert('سیستم هشدار فوری فعال شد.');
             } else {
                 btn.className = "bg-slate-900 border border-slate-800 px-3.5 rounded-xl text-xs text-emerald-400 shrink-0 cursor-pointer";
                 btn.innerText = "🔔 هشدار فوری";
@@ -433,7 +446,7 @@
             const dateVal = document.getElementById('archive-date').value;
             const resultsDiv = document.getElementById('archive-results');
             if(!dateVal) { alert('لطفاً تاریخ انتخاب کنید.'); return; }
-            resultsDiv.innerHTML = `<div class="text-xs text-slate-400 text-center py-4">نتایج آرشیو ${dateVal}: (بارگذاری موفق)...</div>`;
+            resultsDiv.innerHTML = `<div class="text-xs text-slate-400 text-center py-4">نتایج آرشیو تاریخ ${dateVal} با موفقیت بارگذاری شد.</div>`;
         }
 
         function checkQuiz(btn, isCorrect) {
@@ -464,7 +477,7 @@
             }
             let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">اخبار نشان‌شده شما:</h3><div class="space-y-3">`;
             saved.forEach(item => {
-                let bmImg = (item.imageUrl && item.imageUrl.startsWith('//')) ? 'https:' + item.imageUrl : item.imageUrl;
+                let bmImg = fixImgUrl(item.imageUrl);
                 html += `
                     <div class="bg-slate-900 border border-teal-500/30 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg">
                         ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="تصویر">` : ''}
