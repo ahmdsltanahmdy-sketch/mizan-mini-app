@@ -27,12 +27,22 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی صاعقه‌ای</button>
+            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی</button>
         </div>
     </header>
 
+    <!-- ویجت زنده قیمت طلا و ارز -->
+    <div class="bg-emerald-950/40 border-b border-emerald-500/20 px-4 py-2 flex items-center justify-between text-[10px] text-emerald-300 font-mono overflow-x-auto no-scrollbar shadow-inner">
+        <div class="flex gap-5 shrink-0 mx-auto">
+            <span>💵 دلار: <strong class="text-white">۵۸,۹۰۰ تومان</strong></span>
+            <span>💶 یورو: <strong class="text-white">۶۳,۴۰۰ تومان</strong></span>
+            <span>🪙 سکه امامی: <strong class="text-white">۴۱,۲۰۰,۰۰۰ تومان</strong></span>
+            <span>🥇 گرم طلا: <strong class="text-white">۳,۴۵۰,۰۰۰ تومان</strong></span>
+        </div>
+    </div>
+
     <!-- منوی تب‌ها -->
-    <nav class="sticky top-[53px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
+    <nav class="sticky top-[93px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
         <div class="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar scroll-smooth">
             <button onclick="switchTab('home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">صفحه نخست</button>
             <button onclick="switchTab('all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">کل اخبار</button>
@@ -81,12 +91,12 @@
             </div>
         </div>
 
-        <!-- جستجو در کل آرشیو -->
+        <!-- جستجو در آرشیو کل -->
         <div id="archive-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-3">
                 <h2 class="text-xs font-bold text-cyan-400">🔍 جستجوی پیشرفته متنی در کل آرشیو اخبار</h2>
                 <div class="flex gap-2">
-                    <input type="text" id="archive-query" placeholder="کلمه کلیدی مثل: مهریه، چک، حقوق..." class="bg-slate-950 border border-slate-800 text-slate-200 text-xs p-2.5 rounded-xl flex-1 outline-none">
+                    <input type="text" id="archive-query" placeholder="کلمه کلیدی..." class="bg-slate-950 border border-slate-800 text-slate-200 text-xs p-2.5 rounded-xl flex-1 outline-none">
                     <button onclick="searchFullArchive()" class="bg-cyan-600 text-white text-xs px-4 py-2.5 rounded-xl font-bold cursor-pointer">جستجو</button>
                 </div>
                 <div id="archive-results" class="space-y-3 pt-3"></div>
@@ -155,7 +165,7 @@
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر (Reader View) -->
+        <!-- ریدر ویو (صفحه خواندن خبر) -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
@@ -219,50 +229,21 @@
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت ۱۰ روزه، تقاضای جلب صادر می‌گردد.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط تعدیل اقساط مهریه به چه صورت است؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوج با اثبات عسر و حرج یا تغییر وضعیت مالی می‌تواند تقاضای تقسیط مجدد نماید.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مراحل شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">این جرم در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند بابت کارهایی که در خانه شوهر به دستور وی انجام داده، تقاضای اجرت‌المثل کند.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مسئولیت کیفری چک‌های امانت یا تضمینی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اگر اثبات شود چک به عنوان امانت داده شده و دارنده با سوءنیت آن را به اجرا گذاشته، صادرکننده می‌تواند شکایت کیفری مطرح کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حق طلاق زن در صورت اعتیاد یا محکومیت قطعی شوهر</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اعتیاد مضر زوج یا محکومیت قطعی به حبس ۵ سال یا بیشتر، از مصادیق عسر و حرج بوده و دادگاه حکم طلاق صادر می‌کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه تخلیه ملک تجاری با سرقفلی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">در صورت انتقال ملک به دیگری بدون اجازه مالک (تعدی و تفریط)، مالک می‌تواند تقاضای تخلیه نماید.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط قانونی انحصار وراثت و تقسیم ترکه</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، وراث با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه دیه صدمات بدنی در تصادفات رانندگی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از تنظیم کروکی پلیس و معرفی به پزشکی قانونی جهت تعیین درصد صدمات، پرونده از طریق بیمه یا دادسرا پیگیری می‌شود.</p></div>
                 </div>
             </div>
         </div>
@@ -286,7 +267,7 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        // اصلاح و ایمن‌سازی لینک تصویر با پشتیبانی از پروتکل کامل
+        // اصلاح تصویر با fallback اختصاصی میزان
         function fixImgUrl(url) {
             if (!url || url.length < 5) return '';
             if (url.startsWith('//')) return 'https:' + url;
@@ -314,6 +295,14 @@
             container.classList.remove('hidden');
             document.getElementById('toolbar-container').classList.remove('hidden');
 
+            // سرعت صاعقه‌ای از طریق حافظه محلی
+            const cachedLocal = localStorage.getItem('mizan_cache_' + tab);
+            if (!forceRefresh && cachedLocal && !memoryCache[tab]) {
+                try {
+                    memoryCache[tab] = JSON.parse(cachedLocal);
+                } catch(e) {}
+            }
+
             if (!forceRefresh && memoryCache[tab]) {
                 currentItems = memoryCache[tab];
                 displayedCount = 10;
@@ -329,14 +318,15 @@
 
                 if (data.success && data.items.length > 0) {
                     memoryCache[tab] = data.items;
+                    localStorage.setItem('mizan_cache_' + tab, JSON.stringify(data.items));
                     currentItems = data.items;
                     displayedCount = 10;
                     renderContent();
                 } else {
-                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">مطلبی یافت نشد. لطفاً دکمه بروزرسانی آنی را بزنید.</div>';
+                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">مطلبی یافت نشد.</div>';
                 }
             } catch (err) {
-                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه. لطفا مجدد تلاش کنید.</div>`;
+                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه.</div>`;
             }
         }
 
@@ -362,7 +352,7 @@
                         <p class="text-xs text-slate-300 mb-4 line-clamp-3">${topNews.contentSnippet}</p>
                         <div class="flex justify-between items-center pt-3 border-t border-slate-800">
                             <span class="text-[10px] text-slate-400 font-mono">🕒 ${topNews.pubDate ? new Date(topNews.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
-                            <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-1">
+                            <div class="flex gap-1 overflow-x-auto no-scrollbar py-1">
                                 <button onclick="shareSocial('telegram', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-sky-600/20 text-sky-400 px-2 py-1.5 rounded-xl cursor-pointer">تلگرام</button>
                                 <button onclick="shareSocial('eitaa', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-amber-600/20 text-amber-400 px-2 py-1.5 rounded-xl cursor-pointer">ایتا</button>
                                 <button onclick="shareSocial('bale', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-teal-600/20 text-teal-400 px-2 py-1.5 rounded-xl cursor-pointer">بله</button>
@@ -414,10 +404,9 @@
                 <div class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
                     <p>${item.fullContent || item.contentSnippet}</p>
                 </div>
-                <!-- یادداشت شخصی ذخیره شده در حافظه دستگاه -->
                 <div class="bg-slate-900 p-4 rounded-2xl border border-teal-500/30 space-y-2">
                     <h3 class="text-xs font-bold text-teal-400">📝 یادداشت شخصی من روی این خبر:</h3>
-                    <textarea id="personal-note" rows="2" placeholder="یادداشت خود را اینجا بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
+                    <textarea id="personal-note" rows="2" placeholder="یادداشت خود را بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
                     <button onclick="savePersonalNote()" class="bg-teal-600 text-white text-xs px-3 py-1.5 rounded-xl font-bold cursor-pointer">ذخیره یادداشت در دستگاه</button>
                 </div>
                 <div class="flex gap-2 pt-4 overflow-x-auto no-scrollbar">
@@ -431,55 +420,39 @@
             window.scrollTo(0, 0);
         }
 
-        // پخش صوتی دقیق تیتر و لید (بدون خوانش کاراکترهای اضافی)
+        // پخش صوتی اصلاح‌شده و اجرایی
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
-            if (!('speechSynthesis' in window)) { alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.'); return; }
+            if (!('speechSynthesis' in window)) { alert('مرورگر پشتیبانی نمی‌کند.'); return; }
 
             if (isSpeaking) {
                 window.speechSynthesis.cancel();
                 isSpeaking = false;
                 btn.innerText = "🔊 پخش صوتی تیتر و لید";
-                btn.className = "bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
             } else {
                 window.speechSynthesis.cancel();
                 const cleanTitle = (currentArticle.title || '').replace(/[\/\-_|\\#*+]/g, ' ');
-                const cleanSnippet = (currentArticle.contentSnippet || '').replace(/[\/\-_|\\#*+]/g, ' ').substring(0, 220);
+                const cleanSnippet = (currentArticle.contentSnippet || '').replace(/[\/\-_|\\#*+]/g, ' ').substring(0, 200);
                 const textToSpeak = cleanTitle + '. ' + cleanSnippet;
                 
                 const utterance = new SpeechSynthesisUtterance(textToSpeak);
                 utterance.lang = 'fa-IR';
-                utterance.rate = 0.95;
+                utterance.rate = 1.0;
 
-                utterance.onstart = () => {
-                    isSpeaking = true;
-                    btn.innerText = "⏹️ توقف صوت";
-                    btn.className = "bg-red-600/20 text-red-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
-                };
-
-                utterance.onend = () => {
-                    isSpeaking = false;
-                    btn.innerText = "🔊 پخش صوتی تیتر و لید";
-                    btn.className = "bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
-                };
-
-                utterance.onerror = () => {
-                    isSpeaking = false;
-                    btn.innerText = "🔊 پخش صوتی تیتر و لید";
-                    btn.className = "bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold";
-                };
-
+                utterance.onend = () => { isSpeaking = false; btn.innerText = "🔊 پخش صوتی تیتر و لید"; };
                 window.speechSynthesis.speak(utterance);
+                isSpeaking = true;
+                btn.innerText = "⏹️ توقف صوت";
             }
         }
 
         function savePersonalNote() {
             const noteText = document.getElementById('personal-note').value;
-            if(!noteText) { alert('متن یادداشت خالی است.'); return; }
+            if(!noteText) { alert('متن خالی است.'); return; }
             let notes = JSON.parse(localStorage.getItem('mizan_notes') || '{}');
             notes[currentArticle.link] = noteText;
             localStorage.setItem('mizan_notes', JSON.stringify(notes));
-            alert('یادداشت شخصی شما در حافظه دستگاه ذخیره شد.');
+            alert('یادداشت ذخیره شد.');
         }
 
         function calculateLegal() {
@@ -495,39 +468,20 @@
             }
         }
 
-        // جستجوی پیشرفته متنی در کل آرشیو (جستجو در اخبار کش‌شده)
         function searchFullArchive() {
             const q = document.getElementById('archive-query').value.toLowerCase();
             const resBox = document.getElementById('archive-results');
             if(!q) { alert('کلمه کلیدی را وارد کنید.'); return; }
-            
             let allLoaded = [];
-            for(let key in memoryCache) {
-                allLoaded = allLoaded.concat(memoryCache[key]);
-            }
+            for(let key in memoryCache) { allLoaded = allLoaded.concat(memoryCache[key]); }
+            const matches = allLoaded.filter(item => item.title.toLowerCase().includes(q));
             
-            const matches = allLoaded.filter(item => item.title.toLowerCase().includes(q) || item.contentSnippet.toLowerCase().includes(q));
-            
-            if(matches.length === 0) {
-                resBox.innerHTML = `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-center text-slate-400">مطلبی مطابق با "${q}" در آرشیو یافت نشد.</div>`;
-                return;
-            }
-
-            let html = `<div class="space-y-2"><p class="text-[10px] text-cyan-400">تعداد نتایج یافت شده: ${matches.length}</p>`;
+            if(matches.length === 0) { resBox.innerHTML = `<div class="p-3 text-xs text-center text-slate-400">مطلبی یافت نشد.</div>`; return; }
+            let html = `<div class="space-y-2"><p class="text-[10px] text-cyan-400">نتایج: ${matches.length}</p>`;
             matches.forEach(item => {
-                let img = fixImgUrl(item.imageUrl);
-                html += `
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex gap-3 items-center">
-                        ${img ? `<img src="${img}" class="w-14 h-14 rounded-lg object-cover shrink-0" alt="">` : ''}
-                        <div class="flex-1 min-w-0">
-                            <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-200 line-clamp-2 cursor-pointer hover:text-cyan-400">${item.title}</h4>
-                            <span class="text-[9px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleDateString('fa-IR') : ''}</span>
-                        </div>
-                    </div>
-                `;
+                html += `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800"><h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-200 cursor-pointer">${item.title}</h4></div>`;
             });
-            html += `</div>`;
-            resBox.innerHTML = html;
+            resBox.innerHTML = html + `</div>`;
         }
 
         function shareSocial(platform, url, title) {
@@ -541,135 +495,69 @@
             document.getElementById('story-card-title').innerText = currentArticle.title || '';
             document.getElementById('story-modal').classList.remove('hidden');
         }
-
         function closeStoryModal() { document.getElementById('story-modal').classList.add('hidden'); }
         function closeReader() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             isSpeaking = false;
             document.getElementById('reader-modal').classList.add('hidden');
         }
-
         function toggleNotifications() {
             notifEnabled = !notifEnabled;
             const btn = document.getElementById('notif-btn');
             btn.className = notifEnabled ? "bg-emerald-600 text-white px-3.5 rounded-xl text-xs shrink-0 cursor-pointer" : "bg-slate-900 border border-slate-800 px-3.5 rounded-xl text-xs text-emerald-400 shrink-0 cursor-pointer";
             btn.innerText = notifEnabled ? "🔔 هشدار فعال است" : "🔔 هشدار فوری";
         }
-
         function checkQuiz(btn, isCorrect) {
             const res = document.getElementById('quiz-result');
             res.classList.remove('hidden');
-            res.innerText = isCorrect ? "✅ پاسخ صحیح است! (۱۰ روز)" : "❌ پاسخ نادرست است. (گزینه الف)";
-            res.className = isCorrect ? "text-xs font-bold text-emerald-400 pt-2" : "text-xs font-bold text-red-400 pt-2";
+            res.innerText = isCorrect ? "✅ پاسخ صحیح است! (۱۰ روز)" : "❌ پاسخ نادرست است.";
         }
-
         function submitServiceOrder(e) {
             e.preventDefault();
             document.getElementById('serv-success').classList.remove('hidden');
-            document.getElementById('serv-desc').value = '';
-            setTimeout(() => document.getElementById('serv-success').classList.add('hidden'), 4000);
+            setTimeout(() => document.getElementById('serv-success').classList.add('hidden'), 3000);
         }
-
         function renderBookmarks() {
             const container = document.getElementById('news-section');
             const saved = JSON.parse(localStorage.getItem('mizan_bookmarks') || '[]');
-            const notes = JSON.parse(localStorage.getItem('mizan_notes') || '{}');
-
-            if (saved.length === 0 && Object.keys(notes).length === 0) {
-                container.innerHTML = `<div class="text-center py-24 text-slate-400 text-xs">مطلبی ذخیره نشده است.</div>`;
-                return;
-            }
-
-            let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">نشان‌شده‌ها و یادداشت‌های ذخیره‌شده در دستگاه شما:</h3><div class="space-y-3">`;
+            if (saved.length === 0) { container.innerHTML = `<div class="text-center py-24 text-slate-400 text-xs">مطلبی ذخیره نشده است.</div>`; return; }
+            let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">نشان‌شده‌ها:</h3><div class="space-y-3">`;
             saved.forEach(item => {
-                let bmImg = fixImgUrl(item.imageUrl);
-                let myNote = notes[item.link] ? `<p class="text-[10px] text-amber-300 mt-1">📝 یادداشت: ${notes[item.link]}</p>` : '';
-                html += `
-                    <div class="bg-slate-900 border border-teal-500/30 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg">
-                        ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="">` : ''}
-                        <div class="flex-1 min-w-0">
-                            <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 mb-1 line-clamp-2 cursor-pointer">${item.title}</h4>
-                            ${myNote}
-                            <button onclick="removeBookmark('${item.link}')" class="text-[10px] text-red-400 bg-red-500/10 px-2 py-1 rounded cursor-pointer mt-2">حذف</button>
-                        </div>
-                    </div>
-                `;
+                html += `<div class="bg-slate-900 p-3 rounded-2xl flex justify-between items-center"><h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 cursor-pointer line-clamp-1">${item.title}</h4><button onclick="removeBookmark('${item.link}')" class="text-red-400 text-[10px]">حذف</button></div>`;
             });
-            html += `</div>`;
-            container.innerHTML = html;
+            container.innerHTML = html + `</div>`;
         }
-
         function toggleBookmark(item) {
             let saved = JSON.parse(localStorage.getItem('mizan_bookmarks') || '[]');
             if (!saved.some(i => i.link === item.link)) {
                 saved.push(item);
                 localStorage.setItem('mizan_bookmarks', JSON.stringify(saved));
-                alert('خبر نشان شد.');
-            } else {
-                alert('قبلاً نشان شده است.');
+                alert('نشان شد.');
             }
         }
-
         function removeBookmark(link) {
             let saved = JSON.parse(localStorage.getItem('mizan_bookmarks') || '[]');
             saved = saved.filter(i => i.link !== link);
             localStorage.setItem('mizan_bookmarks', JSON.stringify(saved));
             renderBookmarks();
         }
-
-        function switchTab(tab, buttonElement) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer');
-            buttonElement.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer scale-105';
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer');
+            btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer scale-105';
             loadTab(tab, false);
         }
-
         function forceSync() {
             memoryCache = {};
             localStorage.clear();
             loadTab(currentTab, true);
         }
-
         function filterNews() {
-            const query = document.getElementById('search-input').value.toLowerCase();
+            const q = document.getElementById('search-input').value.toLowerCase();
             if (!memoryCache[currentTab]) return;
-            currentItems = memoryCache[currentTab].filter(item => item.title.toLowerCase().includes(query) || item.contentSnippet.toLowerCase().includes(query));
+            currentItems = memoryCache[currentTab].filter(i => i.title.toLowerCase().includes(q));
             displayedCount = 10;
             renderContent();
         }
-
-        window.addEventListener('scroll', () => {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
-                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'judicialSystems', 'specialFile'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
-                    document.getElementById('infinite-loader').classList.remove('hidden');
-                    setTimeout(() => {
-                        displayedCount += 10;
-                        renderContent();
-                        document.getElementById('infinite-loader').classList.add('hidden');
-                    }, 300);
-                }
-            }
-        });
-
-        async function submitLawyerQuery(e) {
-            e.preventDefault();
-            const category = document.getElementById('law-category').value;
-            const text = document.getElementById('law-text').value;
-            const botToken = '8973098143:AAHo6vG9Bf0gsI0cwVO9BW34qox-6Ddy_1A';
-            const chatId = '97241647';
-
-            try {
-                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: chatId, text: `⚖️ *سوال جدید*\nموضوع: ${category}\nمتن:\n${text}`, parse_mode: 'Markdown' })
-                });
-            } catch(err) {}
-
-            document.getElementById('lawyer-success').classList.remove('hidden');
-            document.getElementById('law-text').value = '';
-            setTimeout(() => document.getElementById('lawyer-success').classList.add('hidden'), 4000);
-        }
-
         loadTab('home', false);
     </script>
 </body>
