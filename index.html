@@ -31,24 +31,24 @@
         </div>
     </header>
 
-    <!-- ویجت زنده قیمت طلا و ارز متصل به مرجع رسمی TGJU -->
-    <div class="bg-emerald-950/40 border-b border-emerald-500/20 px-4 py-2 flex items-center justify-between text-[10px] text-emerald-300 font-mono overflow-x-auto no-scrollbar shadow-inner">
-        <div class="flex gap-5 shrink-0 mx-auto items-center">
-            <span>📈 مرجع نرخ‌ها: <a href="https://www.tgju.org" target="_blank" class="text-white underline">TGJU</a></span>
-            <span>💵 دلار آزاد: <strong class="text-white">بروزرسانی زنده</strong></span>
-            <span>🪙 سکه امامی: <strong class="text-white">بازار تهران</strong></span>
-            <span>🥇 طلا ۱۸ عیار: <strong class="text-white">نرخ اتحادیه</strong></span>
-        </div>
+    <!-- ویجت رسمی TGJU برای قیمت لحظه‌ای طلا و ارز -->
+    <div class="bg-emerald-950/40 border-b border-emerald-500/20 px-2 py-2 overflow-x-auto no-scrollbar shadow-inner">
+        <tgju
+            type="market-overview"
+            items="137225,137207,137221,137222,137218"
+            columns="dot"
+            token="webservice"
+        ></tgju>
+        <script src="https://api.tgju.org/v1/widget/v2" defer></script>
     </div>
 
-    <!-- منوی تب‌ها -->
+    <!-- منوی تب‌ها (بدون پرونده ویژه و سامانه‌های قضایی، به همراه تب پیوندها) -->
     <nav class="sticky top-[93px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
         <div class="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar scroll-smooth">
             <button onclick="switchTab('home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">صفحه نخست</button>
             <button onclick="switchTab('all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">کل اخبار</button>
             <button onclick="switchTab('judicial', this)" id="tab-judicial" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">قضایی</button>
-            <button onclick="switchTab('judicialSystems', this)" id="tab-judicialSystems" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-teal-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">⚖️ سامانه‌های قضایی</button>
-            <button onclick="switchTab('specialFile', this)" id="tab-specialFile" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">📂 پرونده ویژه</button>
+            <button onclick="switchTab('links', this)" id="tab-links" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">🔗 پیوندها</button>
             <button onclick="switchTab('humanRights', this)" id="tab-humanRights" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">حقوق بشر</button>
             <button onclick="switchTab('legalMag', this)" id="tab-legalMag" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">مجله حقوقی</button>
             <button onclick="switchTab('politics', this)" id="tab-politics" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">سیاست</button>
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <!-- بخش‌های دیگر (آرشیو، محاسبه‌گر، آزمون و...) -->
+        <!-- پنل‌های جانبی (آرشیو، محاسبه‌گر و...) -->
         <div id="archive-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-3">
                 <h2 class="text-xs font-bold text-cyan-400">🔍 جستجوی پیشرفته متنی در کل آرشیو اخبار</h2>
@@ -233,14 +233,6 @@
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مراحل شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">این جرم در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
                 </div>
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند بابت کارهایی که در خانه شوهر به دستور وی انجام داده، تقاضای اجرت‌المثل کند.</p></div>
-                </div>
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
-                </div>
             </div>
         </div>
 
@@ -263,12 +255,14 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        // اصلاح و جایگزینی عکس در صورت خرابی یا عدم وجود
+        // پروکسی تصویر امن جهت عبور از خطای CORS و نمایش قطعی تصاویر
         function fixImgUrl(url) {
             if (!url || url.length < 5) return '';
-            if (url.startsWith('//')) return 'https:' + url;
-            if (url.startsWith('/')) return 'https://www.mizanonline.ir' + url;
-            return url;
+            let validUrl = url;
+            if (url.startsWith('//')) validUrl = 'https:' + url;
+            else if (url.startsWith('/')) validUrl = 'https://www.mizanonline.ir' + url;
+            // استفاده از پروکسی تصویر واسط برای بارگذاری ۱۰۰٪ تضمینی
+            return 'https://images.weserv.nl/?url=' + encodeURIComponent(validUrl);
         }
 
         async function loadTab(tab, forceRefresh = false) {
@@ -291,12 +285,9 @@
             container.classList.remove('hidden');
             document.getElementById('toolbar-container').classList.remove('hidden');
 
-            // بارگذاری فوق‌سریع از حافظه محلی دستگاه
             const cachedLocal = localStorage.getItem('mizan_cache_' + tab);
             if (!forceRefresh && cachedLocal && !memoryCache[tab]) {
-                try {
-                    memoryCache[tab] = JSON.parse(cachedLocal);
-                } catch(e) {}
+                try { memoryCache[tab] = JSON.parse(cachedLocal); } catch(e) {}
             }
 
             if (!forceRefresh && memoryCache[tab]) {
@@ -349,10 +340,10 @@
                         <div class="flex justify-between items-center pt-3 border-t border-slate-800">
                             <span class="text-[10px] text-slate-400 font-mono">🕒 ${topNews.pubDate ? new Date(topNews.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
                             <div class="flex gap-1 overflow-x-auto no-scrollbar py-1">
-                                <button onclick="shareSocial('telegram', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-sky-600/20 text-sky-400 px-2 py-1.5 rounded-xl cursor-pointer">تلگرام</button>
-                                <button onclick="shareSocial('eitaa', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-amber-600/20 text-amber-400 px-2 py-1.5 rounded-xl cursor-pointer">ایتا</button>
-                                <button onclick="shareSocial('bale', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-teal-600/20 text-teal-400 px-2 py-1.5 rounded-xl cursor-pointer">بله</button>
-                                <button onclick="shareSocial('rubika', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-purple-600/20 text-purple-400 px-2 py-1.5 rounded-xl cursor-pointer">روبیکا</button>
+                                <button onclick="shareSocial('telegram', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-sky-600/20 text-sky-400 px-2.5 py-1.5 rounded-xl cursor-pointer">تلگرام</button>
+                                <button onclick="shareSocial('eitaa', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-amber-600/20 text-amber-400 px-2.5 py-1.5 rounded-xl cursor-pointer">ایتا</button>
+                                <button onclick="shareSocial('bale', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-teal-600/20 text-teal-400 px-2.5 py-1.5 rounded-xl cursor-pointer">بله</button>
+                                <button onclick="shareSocial('rubika', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-[10px] bg-purple-600/20 text-purple-400 px-2.5 py-1.5 rounded-xl cursor-pointer">روبیکا</button>
                                 <button onclick='openReader(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="text-[10px] bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-bold cursor-pointer">مطالعه</button>
                             </div>
                         </div>
@@ -416,10 +407,10 @@
             window.scrollTo(0, 0);
         }
 
-        // پخش صوتی اصلاح‌شده بدون ارور
+        // پخش صوتی ایمن و اصلاح‌شده تیتر و لید
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
-            if (!('speechSynthesis' in window)) { alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.'); return; }
+            if (!('speechSynthesis' in window)) { alert('مرورگر پشتیبانی نمی‌کند.'); return; }
 
             if (isSpeaking) {
                 window.speechSynthesis.cancel();
@@ -555,10 +546,10 @@
             renderContent();
         }
 
-        // اسکرول بی‌نهایت روان و بی‌خطا
+        // فعال‌سازی اسکرول بی‌نهایت روان
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 400) {
-                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'judicialSystems', 'specialFile'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
+                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'links'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
                     document.getElementById('infinite-loader').classList.remove('hidden');
                     setTimeout(() => {
                         displayedCount += 10;
