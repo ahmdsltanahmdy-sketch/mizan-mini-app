@@ -13,15 +13,15 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#0b0f17] text-slate-100 antialiased pb-24 selection:bg-emerald-500 selection:text-white">
+<body class="bg-[#070a10] text-slate-100 antialiased pb-24 selection:bg-emerald-500 selection:text-white">
 
-    <!-- هدر اختصاصی -->
-    <header class="sticky top-0 z-50 bg-[#0b0f17]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3 flex justify-between items-center shadow-2xl">
-        <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-black text-white shadow-lg shadow-emerald-900/30">م</div>
+    <!-- هدر شیشه‌ای و سایبرنتیک میزان -->
+    <header class="sticky top-0 z-50 bg-[#070a10]/85 backdrop-blur-2xl border-b border-slate-800/80 px-4 py-3 flex justify-between items-center shadow-2xl">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center font-black text-white shadow-lg shadow-emerald-900/40 text-base">م</div>
             <div>
                 <h1 class="text-xs font-black tracking-wider text-emerald-400">خبرگزاری میزان</h1>
-                <p class="text-[9px] text-slate-400">مینی‌اپ اختصاصی و لحظه‌ای</p>
+                <p class="text-[9px] text-slate-400 font-medium">مینی‌اپ فوق‌پیشرفته و لحظه‌ای</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -31,18 +31,23 @@
         </div>
     </header>
 
-    <!-- منوی افقی و تب‌ها -->
-    <nav class="flex gap-2 overflow-x-auto px-4 py-3 bg-[#111827]/80 backdrop-blur-md border-b border-slate-800/80 no-scrollbar sticky top-[57px] z-40 shadow-md">
-        <button onclick="switchTab('news', 'home', this)" id="btn-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-900/40">صفحه نخست</button>
-        <button onclick="switchTab('news', 'judicial', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">قضایی</button>
-        <button onclick="switchTab('news', 'humanRights', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">حقوق بشر</button>
-        <button onclick="switchTab('news', 'legalMag', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">مجله حقوقی</button>
-        <button onclick="switchTab('news', 'politics', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">سیاست</button>
-        <button onclick="switchTab('news', 'society', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جامعه</button>
-        <button onclick="switchTab('news', 'economy', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اقتصاد</button>
-        <button onclick="switchTab('news', 'sports', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">ورزشی</button>
-        <button onclick="switchTab('news', 'photos', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">عکس</button>
-        <button onclick="switchTab('lawyer', null, this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-900/30 flex items-center gap-1.5">
+    <!-- منوی افقی جامع با تمام دسته‌بندی‌های خواسته شده -->
+    <nav class="flex gap-2 overflow-x-auto px-4 py-3 bg-[#0d1322]/90 backdrop-blur-md border-b border-slate-800/80 no-scrollbar sticky top-[61px] z-40 shadow-xl">
+        <button onclick="switchTab('news', 'home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-950">صفحه نخست</button>
+        <button onclick="switchTab('news', 'all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">کل اخبار</button>
+        <button onclick="switchTab('news', 'judicial', this)" id="tab-judicial" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">قضایی</button>
+        <button onclick="switchTab('news', 'humanRights', this)" id="tab-humanRights" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">حقوق بشر</button>
+        <button onclick="switchTab('news', 'legalMag', this)" id="tab-legalMag" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">مجله حقوقی</button>
+        <button onclick="switchTab('news', 'politics', this)" id="tab-politics" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">سیاست</button>
+        <button onclick="switchTab('news', 'society', this)" id="tab-society" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جامعه</button>
+        <button onclick="switchTab('news', 'economy', this)" id="tab-economy" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اقتصاد</button>
+        <button onclick="switchTab('news', 'culture', this)" id="tab-culture" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">فرهنگی</button>
+        <button onclick="switchTab('news', 'sports', this)" id="tab-sports" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">ورزشی</button>
+        <button onclick="switchTab('news', 'world', this)" id="tab-world" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">جهان</button>
+        <button onclick="switchTab('news', 'multimedia', this)" id="tab-multimedia" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">چندرسانه</button>
+        <button onclick="switchTab('news', 'photos', this)" id="tab-photos" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">عکس</button>
+        <button onclick="switchTab('news', 'infographic', this)" id="tab-infographic" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40">اینفوگرافیک</button>
+        <button onclick="switchTab('lawyer', null, this)" id="tab-lawyer" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-950 flex items-center gap-1.5">
             <span>⚖️</span> وکیل آنلاین
         </button>
     </nav>
@@ -51,26 +56,27 @@
     <main class="max-w-xl mx-auto p-4">
         <!-- بخش اخبار -->
         <div id="news-section" class="space-y-4">
-            <div class="text-center py-24 text-slate-500 flex flex-col items-center gap-3">
-                <div class="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-xs">در حال بارگذاری پرسرعت اخبار...</p>
+            <div class="text-center py-28 text-slate-500 flex flex-col items-center gap-3">
+                <div class="w-9 h-9 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs">بارگذاری گرافیکی اخبار...</p>
             </div>
         </div>
 
-        <!-- بخش وکیل آنلاین (همراه با پرسش و پاسخ‌های حقوقی) -->
+        <!-- بخش وکیل آنلاین با سوال و جواب‌های جامع حقوقی -->
         <div id="lawyer-section" class="hidden space-y-6">
-            <div class="bg-gradient-to-br from-slate-900 to-[#111827] border border-amber-500/30 rounded-2xl p-5 shadow-2xl">
-                <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3">
+            <div class="bg-gradient-to-br from-slate-900 via-[#0d1322] to-slate-950 border border-amber-500/30 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
+                <div class="flex items-center gap-3 mb-4 border-b border-slate-800/80 pb-3 relative z-10">
                     <span class="text-2xl">⚖️</span>
                     <div>
-                        <h2 class="text-sm font-bold text-amber-400">سامانه مشاوره و وکیل آنلاین</h2>
-                        <p class="text-[10px] text-slate-400">سوال خود را بفرستید تا مستقیماً به ربات و کارشناس ارسال شود.</p>
+                        <h2 class="text-sm font-bold text-amber-400">سامانه مشاوره و وکیل آنلاین تخصصی</h2>
+                        <p class="text-[10px] text-slate-400">ارسال مستقیم پرسش به کارشناسان حقوقی قوه قضائیه</p>
                     </div>
                 </div>
-                <form onsubmit="submitLawyerQuery(event)" class="space-y-3">
+                <form onsubmit="submitLawyerQuery(event)" class="space-y-3 relative z-10">
                     <div>
                         <label class="block text-[11px] font-medium text-slate-300 mb-1">موضوع پرونده:</label>
-                        <select id="law-category" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:border-amber-500 outline-none">
+                        <select id="law-category" class="w-full bg-[#070a10] border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:border-amber-500 outline-none">
                             <option value="civil">حقوقی (قراردادها، ملکی، مطالبات)</option>
                             <option value="criminal">کیفری (کلاهبرداری، توهین، چک)</option>
                             <option value="family">خانواده (مهریه، طلاق، حضانت)</option>
@@ -79,34 +85,56 @@
                     </div>
                     <div>
                         <label class="block text-[11px] font-medium text-slate-300 mb-1">شرح متن سوال:</label>
-                        <textarea id="law-text" rows="4" required placeholder="جزئیات پرونده خود را بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:border-amber-500 outline-none resize-none"></textarea>
+                        <textarea id="law-text" rows="4" required placeholder="جزئیات پرونده خود را به طور کامل بنویسید..." class="w-full bg-[#070a10] border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:border-amber-500 outline-none resize-none"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg transition-all cursor-pointer">
-                        ارسال به ربات و کارشناس ارشد حقوقی
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg shadow-amber-950 transition-all cursor-pointer">
+                        ارسال به کارشناس ارشد حقوقی
                     </button>
                 </form>
                 <div id="lawyer-success" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs p-3 rounded-xl text-center">
-                    سوال شما با موفقیت به ربات تلگرام ارسال شد.
+                    سوال شما با موفقیت ثبت شد و به کارشناس ارجاع گردید.
                 </div>
             </div>
 
-            <!-- پرسش و پاسخ‌های حقوقی پرتکرار (برگرفته از سامانه میزان) -->
+            <!-- بانک سوال و جواب‌های حقوقی جامع -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold text-slate-300 px-1">پرسش و پاسخ‌های حقوقی منتخب میزان:</h3>
+                <h3 class="text-xs font-bold text-amber-400/90 px-1 flex items-center gap-1.5">
+                    <span>📚</span> پرسش و پاسخ‌های پرتکرار حقوقی (مرجع میزان)
+                </h3>
                 
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-2">
-                    <h4 class="text-xs font-bold text-amber-400">❓ حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4>
-                    <p class="text-[11px] text-slate-400 leading-relaxed">پاسخ: پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت ۱۰ روزه، در صورت عدم پرداخت وجه چک، تقاضای جلب صادر می‌گردد.</p>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/30 transition-all">
+                    <h4 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed pr-3.5 border-r-2 border-amber-500/40">پاسخ: پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت قانونی ۱۰ روزه، در صورت عدم پرداخت وجه چک یا عدم معرفی مال، تقاضای جلب سیار صادر می‌گردد.</p>
                 </div>
 
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-2">
-                    <h4 class="text-xs font-bold text-amber-400">❓ شرایط تعدیل اقساط مهریه به چه صورت است؟</h4>
-                    <p class="text-[11px] text-slate-400 leading-relaxed">پاسخ: زوج با اثبات عسر و حرج، تغییر وضعیت مالی یا تورم شدید می‌تواند با تقدیم دادخواست به دادگاه صادرکننده حکم قطعی، تقاضای تقسیط مجدد یا افزایش فاصله زمانی پرداخت سکه‌ها را نماید.</p>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/30 transition-all">
+                    <h4 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> شرایط تعدیل اقساط مهریه به چه صورت است؟
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed pr-3.5 border-r-2 border-amber-500/40">پاسخ: زوج با اثبات عسر و حرج، تغییر وضعیت مالی یا تورم شدید می‌تواند با تقدیم دادخواست به دادگاه صادرکننده حکم قطعی، تقاضای تقسیط مجدد یا افزایش فاصله زمانی پرداخت سکه‌ها را نماید.</p>
                 </div>
 
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-2">
-                    <h4 class="text-xs font-bold text-amber-400">❓ مراحل قانونی شکایت از انتشار تصاویر شخصی در فضای مجازی</h4>
-                    <p class="text-[11px] text-slate-400 leading-relaxed">پاسخ: جرم نشر اکاذیب و هتک حیثیت در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت با به همراه داشتن مدارک و مستندات از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p>
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/30 transition-all">
+                    <h4 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> مراحل قانونی شکایت از انتشار تصاویر شخصی در فضای مجازی
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed pr-3.5 border-r-2 border-amber-500/40">پاسخ: جرم نشر اکاذیب و هتک حیثیت در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت با به همراه داشتن مستندات از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p>
+                </div>
+
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/30 transition-all">
+                    <h4 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> نحوه مطالبه اجرت‌المثل ایام زندگی مشترک
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed pr-3.5 border-r-2 border-amber-500/40">پاسخ: زوجه می‌تواند پس از درخواست طلاق یا به صورت مستقل، بابت کارهایی که در خانه شوهر به دستور وی و بدون قصد تبرع (رایگان) انجام داده، تقاضای کارشناسی و دریافت اجرت‌المثل نماید.</p>
+                </div>
+
+                <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 hover:border-amber-500/30 transition-all">
+                    <h4 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> قوانین جدید مهریه و زندان (حبس زدایی)
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed pr-3.5 border-r-2 border-amber-500/40">پاسخ: بر اساس رویه قضایی جدید، تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد مگر در شرایط خاص.</p>
                 </div>
             </div>
         </div>
@@ -119,29 +147,34 @@
         let currentCategory = 'home';
         let currentMode = 'news';
 
+        // لینک تمامی فیدهای RSS خواسته شده
         const rssFeeds = {
             home: 'https://www.mizanonline.ir/fa/rss/allnews',
+            all: 'https://www.mizanonline.ir/fa/rss/allnews',
             judicial: 'https://www.mizanonline.ir/fa/rss/17',
             humanRights: 'https://www.mizanonline.ir/fa/rss/7',
             legalMag: 'https://www.mizanonline.ir/fa/rss/16',
             politics: 'https://www.mizanonline.ir/fa/rss/10',
             society: 'https://www.mizanonline.ir/fa/rss/9',
             economy: 'https://www.mizanonline.ir/fa/rss/11',
+            culture: 'https://www.mizanonline.ir/fa/rss/12',
             sports: 'https://www.mizanonline.ir/fa/rss/13',
-            photos: 'https://www.mizanonline.ir/fa/rss/4'
+            world: 'https://www.mizanonline.ir/fa/rss/14',
+            multimedia: 'https://www.mizanonline.ir/fa/rss/2',
+            photos: 'https://www.mizanonline.ir/fa/rss/4',
+            infographic: 'https://www.mizanonline.ir/fa/rss/3'
         };
 
         async function fetchNews(category = 'home') {
             const container = document.getElementById('news-section');
             if (currentMode === 'news') {
-                container.innerHTML = `<div class="text-center py-24 text-slate-500 flex flex-col items-center gap-3">
-                    <div class="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-xs">در حال بارگذاری اخبار...</p>
+                container.innerHTML = `<div class="text-center py-28 text-slate-500 flex flex-col items-center gap-3">
+                    <div class="w-9 h-9 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-xs font-medium">در حال بارگذاری اخبار بخش...</p>
                 </div>`;
             }
 
             const targetUrl = rssFeeds[category] || rssFeeds.home;
-            // استفاده از پروکسی‌های موازی برای تضمین سرعت و عدم قطعی
             const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
 
             try {
@@ -183,7 +216,6 @@
                     container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">خبری در این بخش یافت نشد.</div>';
                 }
             } catch (err) {
-                // پروکسی جایگزین دوم برای پایداری ۱۰۰ درصدی
                 try {
                     const backupProxy = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl);
                     const res2 = await fetch(backupProxy);
@@ -208,9 +240,8 @@
                 } catch(e) {}
 
                 container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">
-                    ارتباط برقرار شد در حال دریافت فید...
+                    خطا در برقراری ارتباط. لطفا اینترنت خود را بررسی کنید.
                 </div>`;
-                setTimeout(() => fetchNews(category), 2000);
             }
         }
 
@@ -220,16 +251,16 @@
 
             items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'bg-[#111827]/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-xl hover:border-emerald-500/40 transition-all group';
+                card.className = 'bg-gradient-to-br from-slate-900/90 to-[#0d1322] border border-slate-800/90 rounded-2xl overflow-hidden shadow-2xl hover:border-emerald-500/40 transition-all group';
                 
                 card.innerHTML = `
-                    ${item.imageUrl ? `<div class="overflow-hidden h-44"><img src="${item.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="تصویر خبر"></div>` : ''}
-                    <div class="p-4">
+                    ${item.imageUrl ? `<div class="overflow-hidden h-48 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent z-10"></div><img src="${item.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : ''}
+                    <div class="p-4 relative z-20">
                         <h2 class="text-sm font-bold text-slate-100 mb-2 leading-relaxed">${item.title}</h2>
                         <p class="text-[11px] text-slate-400 mb-4 line-clamp-2 leading-relaxed">${item.contentSnippet}</p>
                         <div class="flex justify-between items-center pt-3 border-t border-slate-800/80">
                             <span class="text-[10px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
-                            <a href="${item.link}" target="_blank" class="text-[11px] bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-900/30">مشاهده خبر</a>
+                            <a href="${item.link}" target="_blank" class="text-[11px] bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-950">مشاهده کامل خبر</a>
                         </div>
                     </div>
                 `;
@@ -239,12 +270,22 @@
 
         function switchTab(mode, category, buttonElement) {
             currentMode = mode;
+            
+            // ریست کردن استایل تمام تب‌ها
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40';
+                if(btn.id === 'tab-lawyer') {
+                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-950 flex items-center gap-1.5';
+                } else {
+                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap transition-all hover:border-emerald-500/40';
+                }
             });
-            buttonElement.className = mode === 'lawyer' 
-                ? 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap transition-all shadow-lg shadow-amber-900/30 flex items-center gap-1.5'
-                : 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-900/40';
+
+            // اعمال استایل فعال روی تب کلیک شده
+            if (mode === 'lawyer') {
+                buttonElement.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 whitespace-nowrap transition-all shadow-xl shadow-amber-950 flex items-center gap-1.5 scale-105';
+            } else {
+                buttonElement.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap transition-all shadow-lg shadow-emerald-950 scale-105';
+            }
 
             const newsSec = document.getElementById('news-section');
             const lawyerSec = document.getElementById('lawyer-section');
@@ -265,7 +306,6 @@
             const category = document.getElementById('law-category').value;
             const text = document.getElementById('law-text').value;
 
-            // ارسال اطلاعات به ربات تلگرام (در صورت باز بودن درون تلگرام)
             if (tg && tg.sendData) {
                 tg.sendData(JSON.stringify({ type: 'lawyer_query', category, text }));
             }
