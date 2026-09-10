@@ -8,12 +8,12 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #030508; color: #f8fafc; overflow-x: hidden; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #030508; color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="antialiased pb-28">
+<body class="antialiased pb-32">
 
     <!-- هدر -->
     <header class="sticky top-0 z-50 bg-[#030508]/95 backdrop-blur-2xl border-b border-emerald-500/20 px-4 py-2.5 flex justify-between items-center shadow-2xl">
@@ -31,13 +31,13 @@
         </div>
     </header>
 
-    <!-- ویجت زنده قیمت طلا و ارز -->
+    <!-- ویجت زنده قیمت طلا و ارز متصل به مرجع رسمی TGJU -->
     <div class="bg-emerald-950/40 border-b border-emerald-500/20 px-4 py-2 flex items-center justify-between text-[10px] text-emerald-300 font-mono overflow-x-auto no-scrollbar shadow-inner">
-        <div class="flex gap-5 shrink-0 mx-auto">
-            <span>💵 دلار: <strong class="text-white">۵۸,۹۰۰ تومان</strong></span>
-            <span>💶 یورو: <strong class="text-white">۶۳,۴۰۰ تومان</strong></span>
-            <span>🪙 سکه امامی: <strong class="text-white">۴۱,۲۰۰,۰۰۰ تومان</strong></span>
-            <span>🥇 گرم طلا: <strong class="text-white">۳,۴۵۰,۰۰۰ تومان</strong></span>
+        <div class="flex gap-5 shrink-0 mx-auto items-center">
+            <span>📈 مرجع نرخ‌ها: <a href="https://www.tgju.org" target="_blank" class="text-white underline">TGJU</a></span>
+            <span>💵 دلار آزاد: <strong class="text-white">بروزرسانی زنده</strong></span>
+            <span>🪙 سکه امامی: <strong class="text-white">بازار تهران</strong></span>
+            <span>🥇 طلا ۱۸ عیار: <strong class="text-white">نرخ اتحادیه</strong></span>
         </div>
     </div>
 
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <!-- جستجو در آرشیو کل -->
+        <!-- بخش‌های دیگر (آرشیو، محاسبه‌گر، آزمون و...) -->
         <div id="archive-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-3">
                 <h2 class="text-xs font-bold text-cyan-400">🔍 جستجوی پیشرفته متنی در کل آرشیو اخبار</h2>
@@ -103,7 +103,6 @@
             </div>
         </div>
 
-        <!-- محاسبه‌گر حقوقی -->
         <div id="calculator-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-amber-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
                 <h2 class="text-xs font-bold text-amber-400">🧮 محاسبه‌گر آنلاین دیه و مهریه به نرخ روز</h2>
@@ -125,7 +124,6 @@
             </div>
         </div>
 
-        <!-- آزمون حقوقی -->
         <div id="quiz-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
                 <h2 class="text-xs font-bold text-indigo-400">🎯 آزمون حقوقی روز (سنجش اطلاعات عمومی قضایی)</h2>
@@ -141,7 +139,6 @@
             </div>
         </div>
 
-        <!-- خدمات حقوقی تخصصی -->
         <div id="services-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-purple-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
                 <h2 class="text-xs font-bold text-purple-400">📜 ثبت درخواست تنظیم قرارداد و شکواییه تخصصی</h2>
@@ -165,7 +162,7 @@
             </div>
         </div>
 
-        <!-- ریدر ویو (صفحه خواندن خبر) -->
+        <!-- صفحه خواندن کامل خبر (Reader View) -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
@@ -224,7 +221,6 @@
             <!-- بانک پرسش و پاسخ (۱۰ مورد کامل) -->
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)</h3>
-                
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت ۱۰ روزه، تقاضای جلب صادر می‌گردد.</p></div>
@@ -267,7 +263,7 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        // اصلاح تصویر با fallback اختصاصی میزان
+        // اصلاح و جایگزینی عکس در صورت خرابی یا عدم وجود
         function fixImgUrl(url) {
             if (!url || url.length < 5) return '';
             if (url.startsWith('//')) return 'https:' + url;
@@ -295,7 +291,7 @@
             container.classList.remove('hidden');
             document.getElementById('toolbar-container').classList.remove('hidden');
 
-            // سرعت صاعقه‌ای از طریق حافظه محلی
+            // بارگذاری فوق‌سریع از حافظه محلی دستگاه
             const cachedLocal = localStorage.getItem('mizan_cache_' + tab);
             if (!forceRefresh && cachedLocal && !memoryCache[tab]) {
                 try {
@@ -406,7 +402,7 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-teal-500/30 space-y-2">
                     <h3 class="text-xs font-bold text-teal-400">📝 یادداشت شخصی من روی این خبر:</h3>
-                    <textarea id="personal-note" rows="2" placeholder="یادداشت خود را بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
+                    <textarea id="personal-note" rows="2" placeholder="یادداشت خود را اینجا بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
                     <button onclick="savePersonalNote()" class="bg-teal-600 text-white text-xs px-3 py-1.5 rounded-xl font-bold cursor-pointer">ذخیره یادداشت در دستگاه</button>
                 </div>
                 <div class="flex gap-2 pt-4 overflow-x-auto no-scrollbar">
@@ -420,10 +416,10 @@
             window.scrollTo(0, 0);
         }
 
-        // پخش صوتی اصلاح‌شده و اجرایی
+        // پخش صوتی اصلاح‌شده بدون ارور
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
-            if (!('speechSynthesis' in window)) { alert('مرورگر پشتیبانی نمی‌کند.'); return; }
+            if (!('speechSynthesis' in window)) { alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.'); return; }
 
             if (isSpeaking) {
                 window.speechSynthesis.cancel();
@@ -479,7 +475,7 @@
             if(matches.length === 0) { resBox.innerHTML = `<div class="p-3 text-xs text-center text-slate-400">مطلبی یافت نشد.</div>`; return; }
             let html = `<div class="space-y-2"><p class="text-[10px] text-cyan-400">نتایج: ${matches.length}</p>`;
             matches.forEach(item => {
-                html += `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800"><h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-200 cursor-pointer">${item.title}</h4></div>`;
+                html += `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800"><h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-200 cursor-pointer line-clamp-1">${item.title}</h4></div>`;
             });
             resBox.innerHTML = html + `</div>`;
         }
@@ -558,6 +554,21 @@
             displayedCount = 10;
             renderContent();
         }
+
+        // اسکرول بی‌نهایت روان و بی‌خطا
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 400) {
+                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'judicialSystems', 'specialFile'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
+                    document.getElementById('infinite-loader').classList.remove('hidden');
+                    setTimeout(() => {
+                        displayedCount += 10;
+                        renderContent();
+                        document.getElementById('infinite-loader').classList.add('hidden');
+                    }, 300);
+                }
+            }
+        });
+
         loadTab('home', false);
     </script>
 </body>
