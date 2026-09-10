@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خبرگزاری میزان | مینی‌اپ اختصاصی</title>
+    <title>خبرگزاری میزان | مینی‌اپ فوق‌پیشرفته</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
@@ -39,12 +39,12 @@
         </div>
     </header>
 
-    <!-- ویجت اقتصادی -->
+    <!-- ویجت اقتصادی و آب‌وهوا -->
     <div class="bg-emerald-950/30 border-b border-emerald-500/20 px-4 py-1.5 flex items-center justify-between text-[10px] text-emerald-300 font-mono overflow-x-auto no-scrollbar">
         <div class="flex gap-4 shrink-0">
             <span>🪙 سکه: <strong class="text-white">۴۳,۵۰۰,۰۰۰</strong></span>
             <span>💵 دلار: <strong class="text-white">۵۹,۸۰۰</strong></span>
-            <span>🥇 طلا: <strong class="text-white">۳,۶۲۰,۰۰۰</strong></span>
+            <span>🌤️ تهران: <strong class="text-white">۲۴°C (پاک)</strong></span>
         </div>
     </div>
 
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر (Reader View) -->
+        <!-- صفحه خواندن کامل خبر مجهز به ری‌اکشن و خلاصه هوشمند -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <!-- بخش نظرسنجی زنده -->
+        <!-- نظرسنجی -->
         <div id="poll-section" class="hidden space-y-6">
             <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
                 <h2 class="text-sm font-bold text-indigo-400 flex items-center gap-2"><span>📊</span> نظرسنجی روز: کارایی قوانین جدید چک‌های صیادی را چگونه ارزیابی می‌کنید؟</h2>
@@ -196,7 +196,7 @@
 
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط قانونی انحصار وراثت و تقسیم ترکه</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، ورا با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، وراث با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
                 </div>
 
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
@@ -217,7 +217,7 @@
 
         let currentTab = 'home';
         let memoryCache = {};
-        let displayedCount = 10; // شروع از حداقل ۱۰ خبر
+        let displayedCount = 10;
         let currentItems = [];
         let currentArticleText = '';
 
@@ -260,12 +260,11 @@
                     currentItems = data.items;
                     displayedCount = 10;
                     renderContent();
-                    if (tab === 'home') document.getElementById('breaking-news-ticker').innerText = data.items[0].title;
                 } else {
                     container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">خبری یافت نشد.</div>';
                 }
             } catch (err) {
-                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه.</div>`;
+                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه. لطفا اتصال خود را بررسی کنید.</div>`;
             }
         }
 
