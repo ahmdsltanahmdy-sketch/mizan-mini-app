@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی آنی</button>
+            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی صاعقه‌ای</button>
         </div>
     </header>
 
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <!-- جستجو در کل آرشیو (اصلاح‌شده و کاملاً کاربردی) -->
+        <!-- جستجو در کل آرشیو -->
         <div id="archive-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-3">
                 <h2 class="text-xs font-bold text-cyan-400">🔍 جستجوی پیشرفته متنی در کل آرشیو اخبار</h2>
@@ -286,7 +286,7 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        // سیستم ایمن‌ساز و جایگزین تصویر (Fallback) برای جلوگیری از عدم نمایش عکس
+        // اصلاح و ایمن‌سازی لینک تصویر با پشتیبانی از پروتکل کامل
         function fixImgUrl(url) {
             if (!url || url.length < 5) return '';
             if (url.startsWith('//')) return 'https:' + url;
@@ -333,7 +333,7 @@
                     displayedCount = 10;
                     renderContent();
                 } else {
-                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">مطلبی یافت نشد.</div>';
+                    container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">مطلبی یافت نشد. لطفاً دکمه بروزرسانی آنی را بزنید.</div>';
                 }
             } catch (err) {
                 container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه. لطفا مجدد تلاش کنید.</div>`;
@@ -431,7 +431,7 @@
             window.scrollTo(0, 0);
         }
 
-        // سیستم پخش صوتی تیتر و لید (کاملاً اصلاح‌شده و سازگار با تلگرام)
+        // پخش صوتی دقیق تیتر و لید (بدون خوانش کاراکترهای اضافی)
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
             if (!('speechSynthesis' in window)) { alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.'); return; }
@@ -586,7 +586,7 @@
                 let myNote = notes[item.link] ? `<p class="text-[10px] text-amber-300 mt-1">📝 یادداشت: ${notes[item.link]}</p>` : '';
                 html += `
                     <div class="bg-slate-900 border border-teal-500/30 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg">
-                        ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="تصویر">` : ''}
+                        ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="">` : ''}
                         <div class="flex-1 min-w-0">
                             <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 mb-1 line-clamp-2 cursor-pointer">${item.title}</h4>
                             ${myNote}
