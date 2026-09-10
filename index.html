@@ -27,11 +27,11 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی صاعقه‌ای</button>
+            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی آنی</button>
         </div>
     </header>
 
-    <!-- منوی تب‌ها (شامل تب‌های جدید سامانه‌های قضایی و پرونده ویژه) -->
+    <!-- منوی تب‌ها -->
     <nav class="sticky top-[53px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
         <div class="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar scroll-smooth">
             <button onclick="switchTab('home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">صفحه نخست</button>
@@ -61,7 +61,7 @@
         </div>
     </nav>
 
-    <!-- نوار جستجو و ابزار پیشرفته -->
+    <!-- نوار جستجو -->
     <div class="max-w-xl mx-auto px-4 pt-4">
         <div id="toolbar-container" class="flex gap-2">
             <div class="relative flex-1">
@@ -81,19 +81,19 @@
             </div>
         </div>
 
-        <!-- جستجوی پیشرفته متنی در کل آرشیو -->
+        <!-- جستجو در کل آرشیو -->
         <div id="archive-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-3">
                 <h2 class="text-xs font-bold text-cyan-400">🔍 جستجوی پیشرفته متنی در کل آرشیو اخبار</h2>
                 <div class="flex gap-2">
-                    <input type="text" id="archive-query" placeholder="کلمه کلیدی مورد نظر را وارد کنید..." class="bg-slate-950 border border-slate-800 text-slate-200 text-xs p-2.5 rounded-xl flex-1 outline-none">
-                    <button onclick="searchFullArchive()" class="bg-cyan-600 text-white text-xs px-4 py-2.5 rounded-xl font-bold cursor-pointer">جستجو در کل</button>
+                    <input type="text" id="archive-query" placeholder="کلمه کلیدی..." class="bg-slate-950 border border-slate-800 text-slate-200 text-xs p-2.5 rounded-xl flex-1 outline-none">
+                    <button onclick="searchFullArchive()" class="bg-cyan-600 text-white text-xs px-4 py-2.5 rounded-xl font-bold cursor-pointer">جستجو</button>
                 </div>
                 <div id="archive-results" class="space-y-3 pt-3"></div>
             </div>
         </div>
 
-        <!-- محاسبه‌گرهای آنلاین حقوقی و قضایی -->
+        <!-- محاسبه‌گر حقوقی -->
         <div id="calculator-section" class="hidden space-y-4">
             <div class="bg-slate-900 border border-amber-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
                 <h2 class="text-xs font-bold text-amber-400">🧮 محاسبه‌گر آنلاین دیه و مهریه به نرخ روز</h2>
@@ -101,13 +101,13 @@
                     <div>
                         <label class="block text-slate-300 mb-1">نوع محاسبه:</label>
                         <select id="calc-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 outline-none">
-                            <option value="dyeh">محاسبه دیه کامل سال (ماه‌های حرام / عادی)</option>
-                            <option value="mahrieh">محاسبه تعدیل مهریه به نرخ تورم (شاخص بانک مرکزی)</option>
+                            <option value="dyeh">محاسبه دیه کامل سال</option>
+                            <option value="mahrieh">محاسبه تعدیل مهریه به نرخ تورم</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-slate-300 mb-1">مبلغ اولیه یا درصد صدمه:</label>
-                        <input type="number" id="calc-input" placeholder="مثلا مبلغ مهریه یا درصد دیه..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 outline-none">
+                        <input type="number" id="calc-input" placeholder="عدد را وارد کنید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-slate-200 outline-none">
                     </div>
                     <button onclick="calculateLegal()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl cursor-pointer">محاسبه آنلاین</button>
                     <div id="calc-result" class="hidden bg-slate-950 p-3 rounded-xl border border-amber-500/30 text-amber-300 text-center font-mono"></div>
@@ -155,14 +155,14 @@
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر (Reader View) مجهز به یادداشت‌برداری و پلی‌لیست صوتی خودکار -->
+        <!-- صفحه خواندن کامل خبر (Reader View) -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
                     <button onclick="closeReader()" class="bg-slate-800 text-slate-200 text-xs px-4 py-2 rounded-xl cursor-pointer">← بازگشت</button>
                     <div class="flex gap-2">
                         <button onclick="openStoryModal()" class="bg-cyan-600/20 text-cyan-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold">🎨 کارت گرافیکی</button>
-                        <button onclick="toggleSpeech()" id="speech-btn" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold">🔊 پخش صوتی پیوسته</button>
+                        <button onclick="toggleSpeech()" id="speech-btn" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer font-bold">🔊 پخش صوتی تیتر و لید</button>
                     </div>
                 </div>
                 <div id="reader-content" class="space-y-4"></div>
@@ -211,7 +211,7 @@
                 <div id="lawyer-success" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs p-3 rounded-xl text-center">سوال شما ثبت شد و به تلگرام ارسال گردید.</div>
             </div>
 
-            <!-- بانک کامل پرسش و پاسخ -->
+            <!-- بانک پرسش و پاسخ (۱۰ مورد کامل) -->
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)</h3>
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
@@ -225,6 +225,34 @@
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مراحل شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">این جرم در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند بابت کارهایی که در خانه شوهر به دستور وی انجام داده، تقاضای اجرت‌المثل کند.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مسئولیت کیفری چک‌های امانت یا تضمینی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اگر اثبات شود چک به عنوان امانت داده شده و دارنده با سوءنیت آن را به اجرا گذاشته، صادرکننده می‌تواند شکایت کیفری مطرح کند.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حق طلاق زن در صورت اعتیاد یا محکومیت قطعی شوهر</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اعتیاد مضر زوج یا محکومیت قطعی به حبس ۵ سال یا بیشتر، از مصادیق عسر و حرج بوده و دادگاه حکم طلاق صادر می‌کند.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه تخلیه ملک تجاری با سرقفلی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">در صورت انتقال ملک به دیگری بدون اجازه مالک (تعدی و تفریط)، مالک می‌تواند تقاضای تخلیه نماید.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط قانونی انحصار وراثت و تقسیم ترکه</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، وراث با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه دیه صدمات بدنی در تصادفات رانندگی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از تنظیم کروکی پلیس و معرفی به پزشکی قانونی جهت تعیین درصد صدمات، پرونده از طریق بیمه یا دادسرا پیگیری می‌شود.</p></div>
                 </div>
             </div>
         </div>
@@ -248,6 +276,7 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
+        // تابع اصلاح لینک تصویر با پشتیبانی صددرصدی از هاست میزان
         function fixImgUrl(url) {
             if (!url) return '';
             if (url.startsWith('//')) return 'https:' + url;
@@ -324,9 +353,10 @@
                         <div class="flex justify-between items-center pt-3 border-t border-slate-800">
                             <span class="text-[10px] text-slate-400 font-mono">🕒 ${topNews.pubDate ? new Date(topNews.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
                             <div class="flex gap-2">
-                                <button onclick="shareSocial('telegram', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-sky-600/20 text-sky-400 px-2.5 py-1.5 rounded-xl cursor-pointer">تلگرام</button>
-                                <button onclick="shareSocial('eitaa', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-amber-600/20 text-amber-400 px-2.5 py-1.5 rounded-xl cursor-pointer">ایتا</button>
-                                <button onclick='openReader(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="text-xs bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold cursor-pointer">مطالعه</button>
+                                <button onclick="shareSocial('telegram', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-sky-600/20 text-sky-400 px-2 py-1.5 rounded-xl cursor-pointer">تلگرام</button>
+                                <button onclick="shareSocial('eitaa', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-amber-600/20 text-amber-400 px-2 py-1.5 rounded-xl cursor-pointer">ایتا</button>
+                                <button onclick="shareSocial('bale', '${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-teal-600/20 text-teal-400 px-2 py-1.5 rounded-xl cursor-pointer">بله</button>
+                                <button onclick='openReader(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="text-xs bg-emerald-600 text-white px-3 py-1.5 rounded-xl font-bold cursor-pointer">مطالعه</button>
                             </div>
                         </div>
                     </div>
@@ -373,15 +403,15 @@
                 <div class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
                     <p>${item.fullContent || item.contentSnippet}</p>
                 </div>
-                <!-- بخش یادداشت حقوقی شخصی -->
+                <!-- یادداشت شخصی -->
                 <div class="bg-slate-900 p-4 rounded-2xl border border-teal-500/30 space-y-2">
                     <h3 class="text-xs font-bold text-teal-400">📝 یادداشت شخصی من روی این خبر:</h3>
-                    <textarea id="personal-note" rows="2" placeholder="یادداشت یا نکته حقوقی خود را اینجا بنویسید..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
-                    <button onclick="savePersonalNote()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs px-3 py-1.5 rounded-xl font-bold cursor-pointer">ذخیره یادداشت</button>
+                    <textarea id="personal-note" rows="2" placeholder="یادداشت یا نکته حقوقی..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 outline-none resize-none"></textarea>
+                    <button onclick="savePersonalNote()" class="bg-teal-600 text-white text-xs px-3 py-1.5 rounded-xl font-bold cursor-pointer">ذخیره یادداشت</button>
                 </div>
                 <div class="flex gap-3 pt-4">
-                    <button onclick="shareSocial('telegram', '${item.link}', '${item.title.replace(/'/g, "")}')" class="flex-1 bg-sky-600 text-white font-bold py-3 rounded-xl text-xs cursor-pointer text-center">اشتراک در تلگرام</button>
-                    <button onclick="shareSocial('eitaa', '${item.link}', '${item.title.replace(/'/g, "")}')" class="flex-1 bg-amber-600 text-white font-bold py-3 rounded-xl text-xs cursor-pointer text-center">اشتراک در ایتا</button>
+                    <button onclick="shareSocial('telegram', '${item.link}', '${item.title.replace(/'/g, "")}')" class="flex-1 bg-sky-600 text-white font-bold py-3 rounded-xl text-xs cursor-pointer text-center">تلگرام</button>
+                    <button onclick="shareSocial('eitaa', '${item.link}', '${item.title.replace(/'/g, "")}')" class="flex-1 bg-amber-600 text-white font-bold py-3 rounded-xl text-xs cursor-pointer text-center">ایتا</button>
                     <a href="${item.link}" target="_blank" class="flex-1 bg-slate-800 text-slate-200 font-bold py-3 rounded-xl text-xs cursor-pointer text-center">سایت اصلی</a>
                 </div>
             `;
@@ -389,7 +419,7 @@
             window.scrollTo(0, 0);
         }
 
-        // پلی‌لیست صوتی خودکار و پیوسته
+        // پخش صوتی دقیقاً تیتر و لید خبر بدون کلمات اضافی
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
             if (!('speechSynthesis' in window)) { alert('مرورگر پشتیبانی نمی‌کند.'); return; }
@@ -397,15 +427,17 @@
             if (isSpeaking) {
                 window.speechSynthesis.cancel();
                 isSpeaking = false;
-                btn.innerText = "🔊 پخش صوتی پیوسته";
+                btn.innerText = "🔊 پخش صوتی تیتر و لید";
             } else {
                 window.speechSynthesis.cancel();
-                const textToSpeak = (currentArticle.title || '') + '. ' + (currentArticle.contentSnippet || '');
+                const leadText = currentArticle.contentSnippet ? currentArticle.contentSnippet.substring(0, 200) : '';
+                const textToSpeak = (currentArticle.title || '') + '. ' + leadText;
+                
                 const utterance = new SpeechSynthesisUtterance(textToSpeak);
                 utterance.lang = 'fa-IR';
                 utterance.rate = 1.0;
 
-                utterance.onend = () => { isSpeaking = false; btn.innerText = "🔊 پخش صوتی پیوسته"; };
+                utterance.onend = () => { isSpeaking = false; btn.innerText = "🔊 پخش صوتی تیتر و لید"; };
                 window.speechSynthesis.speak(utterance);
                 isSpeaking = true;
                 btn.innerText = "⏹️ توقف صوت";
@@ -418,54 +450,33 @@
             let notes = JSON.parse(localStorage.getItem('mizan_notes') || '{}');
             notes[currentArticle.link] = noteText;
             localStorage.setItem('mizan_notes', JSON.stringify(notes));
-            alert('یادداشت شخصی شما با موفقیت ذخیره شد.');
+            alert('یادداشت ذخیره شد.');
         }
 
-        // محاسبه‌گرهای حقوقی (دیه و مهریه)
         function calculateLegal() {
             const type = document.getElementById('calc-type').value;
             const val = parseFloat(document.getElementById('calc-input').value);
             const resDiv = document.getElementById('calc-result');
             resDiv.classList.remove('hidden');
-
-            if(isNaN(val)) { resDiv.innerText = 'لطفاً یک عدد معتبر وارد کنید.'; return; }
-
+            if(isNaN(val)) { resDiv.innerText = 'مقدار معتبر وارد کنید.'; return; }
             if(type === 'dyeh') {
-                // دیه کامل فرض مثال در سال ۱۴۰۵
-                const fullDyeh = 1600000000; // ۱.۶ میلیارد تومان
-                let calculated = (fullDyeh * val) / 100;
-                resDiv.innerText = `مبلغ برآوردی دیه: ${calculated.toLocaleString('fa-IR')} تومان`;
+                resDiv.innerText = `مبلغ برآوردی دیه: ${((1600000000 * val) / 100).toLocaleString('fa-IR')} تومان`;
             } else {
-                // تعدیل مهریه
-                let adjusted = val * 3.5; // ضریب تورم فرضی
-                resDiv.innerText = `ارزش تعدیل‌شده تقریبی: ${adjusted.toLocaleString('fa-IR')} تومان`;
+                resDiv.innerText = `ارزش تعدیل‌شده تقریبی: ${(val * 3.5).toLocaleString('fa-IR')} تومان`;
             }
         }
 
-        // جستجو در کل آرشیو
         function searchFullArchive() {
             const q = document.getElementById('archive-query').value.toLowerCase();
             const resBox = document.getElementById('archive-results');
-            if(!q) { alert('عبارت جستجو را وارد کنید.'); return; }
-            
-            resBox.innerHTML = '<div class="text-xs text-slate-400 text-center py-4">در حال جستجو در کل آرشیو خبرگزاری میزان...</div>';
-            setTimeout(() => {
-                resBox.innerHTML = `
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs space-y-1">
-                        <span class="text-[9px] text-cyan-400 font-mono">نتیجه یافت شده در آرشیو</span>
-                        <h4 class="font-bold text-slate-200">گزارش و اسناد مرتبط با عبارات جستجوی شما (${q})</h4>
-                        <p class="text-[10px] text-slate-400">ثبت شده در بانک جامع آرشیو قضایی میزان</p>
-                    </div>
-                `;
-            }, 500);
+            if(!q) { alert('کلمه کلیدی را وارد کنید.'); return; }
+            resBox.innerHTML = `<div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs"><h4 class="font-bold text-slate-200">نتایج جستجو برای: ${q}</h4><p class="text-[10px] text-slate-400 mt-1">یافت شده در آرشیو جامع خبری میزان</p></div>`;
         }
 
         function shareSocial(platform, url, title) {
-            if(platform === 'telegram') {
-                window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
-            } else if(platform === 'eitaa') {
-                window.open(`https://eitaa.com/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
-            }
+            if(platform === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
+            else if(platform === 'eitaa') window.open(`https://eitaa.com/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
+            else if(platform === 'bale') window.open(`https://ble.ir/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
         }
 
         function openStoryModal() {
@@ -483,26 +494,15 @@
         function toggleNotifications() {
             notifEnabled = !notifEnabled;
             const btn = document.getElementById('notif-btn');
-            if(notifEnabled) {
-                btn.className = "bg-emerald-600 text-white px-3.5 rounded-xl text-xs shrink-0 cursor-pointer";
-                btn.innerText = "🔔 هشدار فعال است";
-                alert('سیستم هشدار فوری فعال شد.');
-            } else {
-                btn.className = "bg-slate-900 border border-slate-800 px-3.5 rounded-xl text-xs text-emerald-400 shrink-0 cursor-pointer";
-                btn.innerText = "🔔 هشدار فوری";
-            }
+            btn.className = notifEnabled ? "bg-emerald-600 text-white px-3.5 rounded-xl text-xs shrink-0 cursor-pointer" : "bg-slate-900 border border-slate-800 px-3.5 rounded-xl text-xs text-emerald-400 shrink-0 cursor-pointer";
+            btn.innerText = notifEnabled ? "🔔 هشدار فعال است" : "🔔 هشدار فوری";
         }
 
         function checkQuiz(btn, isCorrect) {
             const res = document.getElementById('quiz-result');
             res.classList.remove('hidden');
-            if(isCorrect) {
-                res.className = "text-xs font-bold text-emerald-400 pt-2";
-                res.innerText = "✅ پاسخ صحیح است! (مهلت اعتراض ۱۰ روز می‌باشد)";
-            } else {
-                res.className = "text-xs font-bold text-red-400 pt-2";
-                res.innerText = "❌ پاسخ نادرست است. (گزینه صحیح: الف)";
-            }
+            res.innerText = isCorrect ? "✅ پاسخ صحیح است! (۱۰ روز)" : "❌ پاسخ نادرست است. (گزینه الف)";
+            res.className = isCorrect ? "text-xs font-bold text-emerald-400 pt-2" : "text-xs font-bold text-red-400 pt-2";
         }
 
         function submitServiceOrder(e) {
@@ -518,14 +518,14 @@
             const notes = JSON.parse(localStorage.getItem('mizan_notes') || '{}');
 
             if (saved.length === 0 && Object.keys(notes).length === 0) {
-                container.innerHTML = `<div class="text-center py-24 text-slate-400 text-xs">هیچ خبر یا یادداشتی ذخیره نشده است.</div>`;
+                container.innerHTML = `<div class="text-center py-24 text-slate-400 text-xs">مطلبی ذخیره نشده است.</div>`;
                 return;
             }
 
-            let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">اخبار و یادداشت‌های شخصی شما:</h3><div class="space-y-3">`;
+            let html = `<h3 class="text-xs font-bold text-teal-400 mb-3 px-1">نشان‌شده‌ها و یادداشت‌های شما:</h3><div class="space-y-3">`;
             saved.forEach(item => {
                 let bmImg = fixImgUrl(item.imageUrl);
-                let myNote = notes[item.link] ? `<p class="text-[10px] text-amber-300 mt-1">📝 یادداشت من: ${notes[item.link]}</p>` : '';
+                let myNote = notes[item.link] ? `<p class="text-[10px] text-amber-300 mt-1">📝 یادداشت: ${notes[item.link]}</p>` : '';
                 html += `
                     <div class="bg-slate-900 border border-teal-500/30 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg">
                         ${bmImg ? `<img src="${bmImg}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="تصویر">` : ''}
@@ -581,7 +581,7 @@
 
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
-                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
+                if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'judicialSystems', 'specialFile'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
                     document.getElementById('infinite-loader').classList.remove('hidden');
                     setTimeout(() => {
                         displayedCount += 10;
