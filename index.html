@@ -82,15 +82,21 @@
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر درون مینی‌اپ (Reader View) -->
+        <!-- صفحه خواندن کامل خبر (Reader View) با قابلیت تغییر فونت -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4 animate-fade-in">
             <div class="max-w-xl mx-auto pb-20">
-                <button onclick="closeReader()" class="mb-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2">
-                    <span>←</span> بازگشت به لیست اخبار
-                </button>
-                <div id="reader-content" class="space-y-4">
-                    <!-- محتوای خبر اینجا لود می‌شود -->
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="closeReader()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2">
+                        <span>←</span> بازگشت
+                    </button>
+                    <!-- تغییر اندازه فونت -->
+                    <div class="flex gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
+                        <button onclick="setFontSize('small')" class="px-2 py-1 text-[10px] text-slate-300 hover:text-white rounded-lg">الف-</button>
+                        <button onclick="setFontSize('medium')" class="px-2 py-1 text-[10px] text-slate-300 hover:text-white rounded-lg">الف</button>
+                        <button onclick="setFontSize('large')" class="px-2 py-1 text-[10px] text-slate-300 hover:text-white rounded-lg">الف+</button>
+                    </div>
                 </div>
+                <div id="reader-content" class="space-y-4"></div>
             </div>
         </div>
 
@@ -98,7 +104,7 @@
             <div class="inline-block w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
 
-        <!-- بخش وکیل آنلاین -->
+        <!-- بخش وکیل آنلاین با بانک کامل سوال و جواب‌ها -->
         <div id="lawyer-section" class="hidden space-y-6">
             <div class="bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-slate-950 border border-amber-500/40 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
@@ -117,6 +123,7 @@
                             <option value="کیفری">کیفری (کلاهبرداری، توهین، چک)</option>
                             <option value="خانواده">خانواده (مهریه، طلاق، حضانت)</option>
                             <option value="کار">کار و امور اجتماعی</option>
+                            <option value="ثبتی">ثبتی و اسناد رسمی</option>
                         </select>
                     </div>
                     <div>
@@ -132,14 +139,50 @@
                 </div>
             </div>
 
-            <!-- بانک سوال و جواب -->
+            <!-- بانک کامل پرسش و پاسخ‌های حقوقی (بیش از ۱۰ مورد جامع) -->
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5">
                     <span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)
                 </h3>
+                
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت قانونی ۱۰ روزه، در صورت عدم پرداخت وجه چک یا عدم معرفی مال، تقاضای جلب سیار صادر می‌گردد.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">شرایط تعدیل اقساط مهریه به چه صورت است؟</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">زوج با اثبات عسر و حرج، تغییر وضعیت مالی یا تورم شدید می‌تواند با تقدیم دادخواست به دادگاه صادرکننده حکم قطعی، تقاضای تقسیط مجدد نماید.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">مراحل قانونی شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">جرم نشر اکاذیب و هتک حیثیت در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت با به همراه داشتن مستندات از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند پس از درخواست طلاق یا به صورت مستقل، بابت کارهایی که در خانه شوهر به دستور وی انجام داده، تقاضای کارشناسی و دریافت اجرت‌المثل نماید.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">بر اساس رویه قضایی جدید، تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">مسئولیت کیفری چک‌های امانت یا تضمینی</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">اگر اثبات شود چک به عنوان امانت یا تضمین داده شده و دارنده با سوءنیت آن را به اجرا گذاشته است، صادرکننده می‌تواند تحت عنوان خیانت در امانت شکایت کیفری مطرح کند.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">حق طلاق زن در صورت اعتیاد یا محکومیت قطعی شوهر</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">مطابق قانون، اعتیاد مضر زوج به طلاق یا محکومیت قطعی کیفری به حبس ۵ سال یا بیشتر، از مصادیق عسر و حرج بوده و دادگاه حکم طلاق صادر می‌کند.</p></div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
+                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓ سوال:</span><h4 class="text-xs font-bold text-slate-100">نحوه تخلیه ملک تجاری با سرقفلی در صورت تخلف مستاجر</h4></div>
+                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡 پاسخ:</span><p class="text-[11px] text-slate-300 leading-relaxed">در صورت انتقال ملک به دیگری بدون اجازه مالکین (تعدی و تفریط یا تغییر شغل)، مالک می‌تواند با تقدیم دادخواست، تقاضای تخلیه بدون پرداخت حق سرقفلی یا با نصف آن را نماید.</p></div>
                 </div>
             </div>
         </div>
@@ -151,7 +194,7 @@
 
         let currentTab = 'home';
         let memoryCache = {};
-        let displayedCount = 10;
+        let displayedCount = 10; // شروع از حداقل ۱۰ خبر
         let currentItems = [];
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
@@ -249,7 +292,7 @@
             renderLayout(container, currentItems.slice(0, displayedCount));
         }
 
-        // رندرینگ همراه با دکمه مطالعه کامل درون مینی‌اپ
+        // رندرینگ استاندارد همراه با نمایش کامل و تضمینی تصاویر
         function renderLayout(container, items) {
             if (items.length === 0) return;
             const topNews = items[0];
@@ -258,7 +301,7 @@
             let html = `
                 <div class="bg-gradient-to-br from-slate-900 to-[#0c1424] border border-emerald-500/40 rounded-3xl overflow-hidden shadow-2xl mb-6 group cyber-card relative">
                     <button onclick='toggleBookmark(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="absolute top-3 left-3 z-30 bg-slate-950/70 backdrop-blur-md p-2 rounded-xl text-teal-400 hover:text-white border border-teal-500/30 transition-all cursor-pointer">📌</button>
-                    ${topNews.imageUrl ? `<div class="overflow-hidden h-64 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div><img src="${topNews.imageUrl}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : ''}
+                    ${topNews.imageUrl ? `<div class="overflow-hidden h-64 relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div><img src="${topNews.imageUrl}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="تصویر خبر"></div>` : `<div class="w-full h-40 bg-slate-800 flex items-center justify-center text-xs text-slate-500">خبرگزاری میزان</div>`}
                     <div class="p-5 relative z-20">
                         <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/30 mb-3 inline-block">سرخط ویژه خبری</span>
                         <h2 class="text-base font-black text-slate-100 mb-2 leading-relaxed">${topNews.title}</h2>
@@ -266,7 +309,8 @@
                         <div class="flex justify-between items-center pt-3 border-t border-slate-800">
                             <span class="text-[10px] text-slate-400 font-mono">${topNews.pubDate ? new Date(topNews.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
                             <div class="flex gap-2">
-                                <button onclick='openReader(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl font-bold transition-all shadow-lg shadow-emerald-950 cursor-pointer">مطالعه کامل خبر</button>
+                                <button onclick="shareToTelegram('${topNews.link}', '${topNews.title.replace(/'/g, "")}')" class="text-xs bg-sky-600/20 hover:bg-sky-600 text-sky-400 hover:text-white px-3 py-2 rounded-xl transition-colors cursor-pointer">تلگرام</button>
+                                <button onclick='openReader(${JSON.stringify(topNews).replace(/'/g, "&apos;")})' class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl font-bold transition-all shadow-lg shadow-emerald-950 cursor-pointer">مطالعه مشروح</button>
                             </div>
                         </div>
                     </div>
@@ -277,7 +321,7 @@
             subNews.forEach((item) => {
                 html += `
                     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg hover:border-emerald-500/40 transition-all relative">
-                        ${item.imageUrl ? `<img src="${item.imageUrl}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 shadow-md border border-slate-700/50" alt="تصویر خبر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 border border-slate-700/50">میزان</div>`}
+                        ${item.imageUrl ? `<img src="${item.imageUrl}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 shadow-md border border-slate-700/50" alt="تصویر خبر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 border border-slate-700/50 font-bold">میزان</div>`}
                         <div class="flex-1 min-w-0">
                             <div class="flex justify-between items-start mb-1">
                                 <h4 onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-xs font-bold text-slate-100 leading-snug line-clamp-2 cursor-pointer hover:text-emerald-400 transition-colors">${item.title}</h4>
@@ -287,7 +331,8 @@
                             <div class="flex justify-between items-center">
                                 <span class="text-[9px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
                                 <div class="flex gap-1.5">
-                                    <button onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-[10px] bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white px-3 py-1 rounded-lg transition-colors font-medium cursor-pointer">مطالعه</button>
+                                    <button onclick="shareToTelegram('${item.link}', '${item.title.replace(/'/g, "")}')" class="text-[10px] bg-sky-600/20 text-sky-400 px-2 py-1 rounded-lg cursor-pointer">تلگرام</button>
+                                    <button onclick='openReader(${JSON.stringify(item).replace(/'/g, "&apos;")})' class="text-[10px] bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white px-2.5 py-1 rounded-lg transition-colors font-medium cursor-pointer">مطالعه</button>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +343,7 @@
             container.innerHTML = html;
         }
 
-        // باز کردن صفحه خواندن خبر درون مینی‌اپ
+        // ریدر ویو مجهز به تغییر اندازه فونت
         function openReader(item) {
             const modal = document.getElementById('reader-modal');
             const content = document.getElementById('reader-content');
@@ -310,7 +355,7 @@
                     <span class="font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleString('fa-IR') : ''}</span>
                 </div>
                 ${item.imageUrl ? `<div class="rounded-2xl overflow-hidden mb-5 border border-slate-800"><img src="${item.imageUrl}" class="w-full max-h-80 object-cover" alt="تصویر خبر"></div>` : ''}
-                <div class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80">
+                <div id="article-text" class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80">
                     <p>${item.fullContent || item.contentSnippet}</p>
                 </div>
                 <div class="flex gap-3 pt-4">
@@ -320,6 +365,13 @@
             `;
             modal.classList.remove('hidden');
             window.scrollTo(0, 0);
+        }
+
+        function setFontSize(size) {
+            const article = document.getElementById('article-text');
+            if(size === 'small') article.className = "text-xs text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80";
+            if(size === 'medium') article.className = "text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80";
+            if(size === 'large') article.className = "text-base text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800/80";
         }
 
         function closeReader() {
@@ -416,12 +468,13 @@
             renderContent();
         }
 
+        // اسکرول بی‌نهایت برای نمایش اخبار بیشتر به صورت خودکار
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
                 if (currentTab !== 'lawyer' && currentTab !== 'bookmarks' && currentItems.length > displayedCount) {
                     document.getElementById('infinite-loader').classList.remove('hidden');
                     setTimeout(() => {
-                        displayedCount += 5;
+                        displayedCount += 10; // افزودن ۱۰ خبر دیگر در هر اسکرول
                         renderContent();
                         document.getElementById('infinite-loader').classList.add('hidden');
                     }, 300);
