@@ -274,7 +274,7 @@
             subNews.forEach((item) => {
                 html += `
                     <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-3.5 flex gap-3.5 items-center shadow-lg hover:border-emerald-500/40 transition-all relative">
-                        ${item.imageUrl ? `<img src="${item.imageUrl}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 shadow-md" alt="تصویر">` : ''}
+                        ${item.imageUrl ? `<img src="${item.imageUrl}" loading="lazy" class="w-24 h-24 rounded-xl object-cover shrink-0 shadow-md border border-slate-700/50" alt="تصویر خبر">` : `<div class="w-24 h-24 rounded-xl bg-slate-800 shrink-0 flex items-center justify-center text-[10px] text-slate-500 border border-slate-700/50">میزان</div>`}
                         <div class="flex-1 min-w-0">
                             <div class="flex justify-between items-start mb-1">
                                 <h4 class="text-xs font-bold text-slate-100 leading-snug line-clamp-2">${item.title}</h4>
@@ -282,7 +282,7 @@
                             </div>
                             <p class="text-[10px] text-slate-400 line-clamp-1 mb-2">${item.contentSnippet}</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-[9px] text-slate-500">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+                                <span class="text-[9px] text-slate-500 font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : ''}</span>
                                 <div class="flex gap-1.5">
                                     <button onclick="shareToTelegram('${item.link}', '${item.title.replace(/'/g, "")}')" class="text-[10px] bg-sky-600/20 text-sky-400 px-2 py-1 rounded-lg cursor-pointer">تلگرام</button>
                                     <a href="${item.link}" target="_blank" class="text-[10px] bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white px-2.5 py-1 rounded-lg transition-colors font-medium">مطالعه</a>
@@ -399,7 +399,6 @@
             }
         });
 
-        // ارسال واقعی پیام وکیل آنلاین به ربات تلگرام با توکن و آیدی عددی شما
         async function submitLawyerQuery(e) {
             e.preventDefault();
             const category = document.getElementById('law-category').value;
