@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خبرگزاری میزان | مینی‌اپ فوق‌پیشرفته</title>
+    <title>خبرگزاری میزان | مینی‌اپ اختصاصی</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: var(--bg-main, #030508); color: var(--text-main, #f8fafc); transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #030508; color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .theme-cyber { --bg-main: #030508; --text-main: #f8fafc; }
-        .theme-sepia { --bg-main: #f4ecd8; --text-main: #2c221e; }
-        .theme-light { --bg-main: #f8fafc; --text-main: #0f172a; }
     </style>
 </head>
-<body class="antialiased pb-28 theme-cyber" id="app-body">
+<body class="antialiased pb-28">
 
     <!-- هدر -->
     <header class="sticky top-0 z-50 bg-[#030508]/90 backdrop-blur-2xl border-b border-emerald-500/20 px-4 py-2.5 flex justify-between items-center shadow-2xl">
@@ -30,23 +27,9 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <select onchange="changeTheme(this.value)" class="bg-slate-900 text-slate-300 text-[10px] border border-slate-800 rounded-lg px-2 py-1 outline-none cursor-pointer">
-                <option value="cyber">تم سایبر</option>
-                <option value="sepia">تم کاغذی</option>
-                <option value="light">تم روشن</option>
-            </select>
-            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-2.5 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄</button>
+            <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی</button>
         </div>
     </header>
-
-    <!-- ویجت اقتصادی و آب‌وهوا -->
-    <div class="bg-emerald-950/30 border-b border-emerald-500/20 px-4 py-1.5 flex items-center justify-between text-[10px] text-emerald-300 font-mono overflow-x-auto no-scrollbar">
-        <div class="flex gap-4 shrink-0">
-            <span>🪙 سکه: <strong class="text-white">۴۳,۵۰۰,۰۰۰</strong></span>
-            <span>💵 دلار: <strong class="text-white">۵۹,۸۰۰</strong></span>
-            <span>🌤️ تهران: <strong class="text-white">۲۴°C (پاک)</strong></span>
-        </div>
-    </div>
 
     <!-- منوی تب‌ها -->
     <nav class="sticky top-[53px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
@@ -66,7 +49,6 @@
             <button onclick="switchTab('photos', this)" id="tab-photos" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">عکس</button>
             <button onclick="switchTab('infographic', this)" id="tab-infographic" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">اینفوگرافیک</button>
             <button onclick="switchTab('bookmarks', this)" id="tab-bookmarks" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-teal-400 border border-teal-500/30 whitespace-nowrap shadow-lg shrink-0 cursor-pointer">📌 نشان‌شده‌ها</button>
-            <button onclick="switchTab('poll', this)" id="tab-poll" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">📊 نظرسنجی</button>
             <button onclick="switchTab('lawyer', this)" id="tab-lawyer" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-amber-500 text-white whitespace-nowrap shadow-lg flex items-center gap-1.5 shrink-0 cursor-pointer">
                 <span>⚖️</span> وکیل آنلاین
             </button>
@@ -86,41 +68,22 @@
         <div id="news-section" class="space-y-4">
             <div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3">
                 <div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-xs font-medium text-emerald-400">بارگذاری صاعقه‌ای اطلاعات...</p>
+                <p class="text-xs font-medium text-emerald-400">بارگذاری صاعقه‌ای اخبار...</p>
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر مجهز به ری‌اکشن و خلاصه هوشمند -->
+        <!-- صفحه خواندن کامل خبر (Reader View) -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
                     <button onclick="closeReader()" class="bg-slate-800 text-slate-200 text-xs px-4 py-2 rounded-xl cursor-pointer">← بازگشت</button>
-                    <div class="flex gap-2">
-                        <button onclick="speakArticle()" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer">🔊 پخش صوتی</button>
-                        <div class="flex gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
-                            <button onclick="setFontSize('small')" class="px-2 py-1 text-[10px] text-slate-300">الف-</button>
-                            <button onclick="setFontSize('medium')" class="px-2 py-1 text-[10px] text-slate-300">الف</button>
-                            <button onclick="setFontSize('large')" class="px-2 py-1 text-[10px] text-slate-300">الف+</button>
-                        </div>
-                    </div>
+                    <button onclick="speakArticle()" class="bg-emerald-600/20 text-emerald-400 text-xs px-3 py-2 rounded-xl cursor-pointer">🔊 پخش صوتی خبر</button>
                 </div>
                 <div id="reader-content" class="space-y-4"></div>
             </div>
         </div>
 
-        <!-- نظرسنجی -->
-        <div id="poll-section" class="hidden space-y-6">
-            <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
-                <h2 class="text-sm font-bold text-indigo-400 flex items-center gap-2"><span>📊</span> نظرسنجی روز: کارایی قوانین جدید چک‌های صیادی را چگونه ارزیابی می‌کنید؟</h2>
-                <div class="space-y-2 text-xs">
-                    <button onclick="alert('رای شما ثبت شد')" class="w-full text-right bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer flex justify-between"><span>بسیار موثر در کاهش پرونده‌ها</span><span class="text-indigo-400">۴۵٪</span></button>
-                    <button onclick="alert('رای شما ثبت شد')" class="w-full text-right bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer flex justify-between"><span>تا حدودی موثر بوده است</span><span class="text-indigo-400">۳۵٪</span></button>
-                    <button onclick="alert('رای شما ثبت شد')" class="w-full text-right bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer flex justify-between"><span>تأثیر چندانی نداشته است</span><span class="text-indigo-400">۲۰٪</span></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- بخش وکیل آنلاین با بیش از ۱۰ پرسش و پاسخ جامع حقوقی -->
+        <!-- بخش وکیل آنلاین با بیش از ۱۰ پرسش و پاسخ حقوقی -->
         <div id="lawyer-section" class="hidden space-y-6">
             <div class="bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-slate-950 border border-amber-500/40 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3">
@@ -138,7 +101,6 @@
                             <option value="کیفری">کیفری (کلاهبرداری، توهین، چک)</option>
                             <option value="خانواده">خانواده (مهریه، طلاق، حضانت)</option>
                             <option value="کار">کار و امور اجتماعی</option>
-                            <option value="ثبتی">ثبتی و اسناد رسمی</option>
                         </select>
                     </div>
                     <div>
@@ -150,9 +112,9 @@
                 <div id="lawyer-success" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs p-3 rounded-xl text-center">سوال شما ثبت شد و به تلگرام ارسال گردید.</div>
             </div>
 
-            <!-- بانک کامل پرسش و پاسخ‌های حقوقی (بیش از ۱۰ مورد کامل) -->
+            <!-- بانک پرسش و پاسخ -->
             <div class="space-y-4">
-                <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (بیش از ۱۰ پرسش مرجع میزان)</h3>
+                <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (بیش از ۱۰ پرسش مرجع)</h3>
                 
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
@@ -227,16 +189,13 @@
             currentTab = tab;
             const container = document.getElementById('news-section');
             const lawyerSec = document.getElementById('lawyer-section');
-            const pollSec = document.getElementById('poll-section');
             const toolbar = document.getElementById('toolbar-container');
 
             lawyerSec.classList.add('hidden');
-            pollSec.classList.add('hidden');
             container.classList.add('hidden');
             toolbar.classList.add('hidden');
 
             if (tab === 'lawyer') { lawyerSec.classList.remove('hidden'); return; }
-            if (tab === 'poll') { pollSec.classList.remove('hidden'); return; }
             if (tab === 'bookmarks') { container.classList.remove('hidden'); renderBookmarks(); return; }
 
             container.classList.remove('hidden');
@@ -249,7 +208,7 @@
                 return;
             }
 
-            container.innerHTML = `<div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3"><div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div><p class="text-xs font-medium text-emerald-400">بارگذاری اطلاعات...</p></div>`;
+            container.innerHTML = `<div class="text-center py-32 text-slate-500 flex flex-col items-center gap-3"><div class="w-10 h-10 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin"></div><p class="text-xs font-medium text-emerald-400">در حال دریافت پرسرعت اخبار...</p></div>`;
 
             try {
                 const response = await fetch(`${SCRIPT_URL}?category=${tab}`);
@@ -264,7 +223,7 @@
                     container.innerHTML = '<div class="text-center py-20 text-red-400 text-xs">خبری یافت نشد.</div>';
                 }
             } catch (err) {
-                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه. لطفا اتصال خود را بررسی کنید.</div>`;
+                container.innerHTML = `<div class="text-center py-16 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">خطا در بارگذاری شبکه. لطفا مجدد تلاش کنید.</div>`;
             }
         }
 
@@ -333,7 +292,7 @@
                     <span class="font-mono">${item.pubDate ? new Date(item.pubDate).toLocaleString('fa-IR') : ''}</span>
                 </div>
                 ${item.imageUrl ? `<div class="rounded-2xl overflow-hidden mb-5 border border-slate-800"><img src="${item.imageUrl}" class="w-full max-h-80 object-cover" alt="تصویر"></div>` : ''}
-                <div id="article-text" class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                <div class="text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
                     <p>${currentArticleText}</p>
                 </div>
                 <div class="flex gap-3 pt-4">
@@ -350,27 +309,16 @@
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(currentArticleText);
                 utterance.lang = 'fa-IR';
+                window.speechSynthesis.onstart = () => alert('پخش صوتی خبر آغاز شد.');
                 window.speechSynthesis.speak(utterance);
-                alert('پخش صوتی خبر آغاز شد.');
             } else {
-                alert('مرورگر شما پشتیبانی نمی‌کند.');
+                alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.');
             }
         }
 
-        function setFontSize(size) {
-            const article = document.getElementById('article-text');
-            if(size === 'small') article.className = "text-xs text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800";
-            if(size === 'medium') article.className = "text-sm text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800";
-            if(size === 'large') article.className = "text-base text-slate-200 leading-relaxed space-y-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800";
-        }
-
         function closeReader() {
-            window.speechSynthesis.cancel();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             document.getElementById('reader-modal').classList.add('hidden');
-        }
-
-        function changeTheme(theme) {
-            document.getElementById('app-body').className = `antialiased pb-28 theme-${theme}`;
         }
 
         function renderBookmarks() {
@@ -440,7 +388,7 @@
 
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
-                if (['lawyer', 'poll', 'bookmarks'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
+                if (['lawyer', 'bookmarks'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
                     document.getElementById('infinite-loader').classList.remove('hidden');
                     setTimeout(() => {
                         displayedCount += 10;
