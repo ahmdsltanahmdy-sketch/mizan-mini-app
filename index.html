@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,15 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #030508; color: #f8fafc; }
+        body { font-family: 'Vazirmatn', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="antialiased pb-32">
+<body class="antialiased pb-32 transition-colors duration-300 bg-[#030508] text-slate-100 dark:bg-[#030508] dark:text-slate-100 light:bg-slate-100 light:text-slate-900" id="app-body">
 
     <!-- هدر -->
-    <header class="sticky top-0 z-50 bg-[#030508]/95 backdrop-blur-2xl border-b border-emerald-500/20 px-4 py-2.5 flex justify-between items-center shadow-2xl">
+    <header class="sticky top-0 z-50 backdrop-blur-2xl border-b px-4 py-2.5 flex justify-between items-center shadow-2xl transition-colors duration-300 bg-[#030508]/95 border-emerald-500/20 dark:bg-[#030508]/95 dark:border-emerald-500/20 light:bg-white/95 light:border-slate-200">
         <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center font-black text-white shadow-xl text-base border border-emerald-400/30">م</div>
             <div>
@@ -27,26 +27,27 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
+            <button onclick="toggleTheme()" id="theme-toggle-btn" class="text-[10px] font-bold bg-slate-800 text-amber-400 px-3 py-1.5 rounded-xl border border-slate-700 cursor-pointer shadow">☀️ تم روشن</button>
             <button onclick="forceSync()" class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/30 cursor-pointer">🔄 بروزرسانی</button>
         </div>
     </header>
 
-    <!-- ویجت جدید TGJU برای قیمت لحظه‌ای طلا و ارز -->
-    <div class="bg-emerald-950/40 border-b border-emerald-500/20 px-2 py-2 overflow-x-auto no-scrollbar shadow-inner">
+    <!-- ویجت جدید TGJU -->
+    <div class="border-b px-2 py-2 overflow-x-auto no-scrollbar shadow-inner transition-colors duration-300 bg-emerald-950/40 border-emerald-500/20 dark:bg-emerald-950/40 light:bg-emerald-50">
         <tgju
-            type="ticker-tap"
-            items="398096,398097,535605,398115,398102"
+            type="ticker"
+            items="137121,137152,137203"
             columns="dot"
-            speed="35"
             token="webservice"
             styles='{
-                "low": "#f50f03"
+                "title": "#000000",
+                "dot": "#ff9100"
             }'></tgju>
         <script src="https://api.tgju.org/v1/widget/v2" defer></script>
     </div>
 
     <!-- منوی تب‌ها -->
-    <nav class="sticky top-[93px] z-40 bg-[#060913]/95 backdrop-blur-xl border-b border-slate-800 shadow-xl">
+    <nav class="sticky top-[93px] z-40 backdrop-blur-xl border-b shadow-xl transition-colors duration-300 bg-[#060913]/95 border-slate-800 dark:bg-[#060913]/95 dark:border-slate-800 light:bg-white/95 light:border-slate-200">
         <div class="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar scroll-smooth">
             <button onclick="switchTab('home', this)" id="tab-home" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white whitespace-nowrap shadow-lg shrink-0 cursor-pointer">صفحه نخست</button>
             <button onclick="switchTab('all', this)" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 whitespace-nowrap shrink-0 cursor-pointer">کل اخبار</button>
@@ -165,7 +166,7 @@
             </div>
         </div>
 
-        <!-- صفحه خواندن کامل خبر (Reader View) -->
+        <!-- ریدر ویو -->
         <div id="reader-modal" class="hidden fixed inset-0 z-50 bg-[#030508]/95 backdrop-blur-xl overflow-y-auto p-4">
             <div class="max-w-xl mx-auto pb-20">
                 <div class="flex justify-between items-center mb-4">
@@ -192,7 +193,7 @@
             </div>
         </div>
 
-        <!-- تب اختصاصی وکیل آنلاین (حداقل ۱۰ پرسش و پاسخ کامل) -->
+        <!-- وکیل آنلاین -->
         <div id="lawyer-section" class="hidden space-y-6">
             <div class="bg-gradient-to-br from-slate-900 via-[#0a0f1d] to-slate-950 border border-amber-500/40 rounded-3xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="flex items-center gap-3 mb-4 border-b border-slate-800 pb-3">
@@ -221,58 +222,28 @@
                 <div id="lawyer-success" class="hidden mt-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs p-3 rounded-xl text-center">سوال شما ثبت شد و به تلگرام ارسال گردید.</div>
             </div>
 
-            <!-- بانک پرسش و پاسخ (۱۰ مورد کامل و جامع) -->
+            <!-- بانک پرسش و پاسخ (۱۰ مورد کامل) -->
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 px-1 flex items-center gap-1.5"><span>📚</span> بانک جامع سوال و جواب‌های حقوقی (مرجع میزان)</h3>
-                
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حکم جلب سیار در چک صیادی چگونه صادر می‌شود؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از صدور اجراییه از طریق دفتر خدمات الکترونیک قضایی و انقضای مهلت ۱۰ روزه، تقاضای جلب صادر می‌گردد.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط تعدیل اقساط مهریه به چه صورت است؟</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوج با اثبات عسر و حرج یا تغییر وضعیت مالی می‌تواند تقاضای تقسیط مجدد نماید.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مراحل شکایت از انتشار تصاویر شخصی در فضای مجازی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">این جرم در دادسرای جرایم رایانه‌ای قابل پیگیری است؛ ثبت شکایت از طریق دفاتر خدمات الکترونیک قضایی انجام می‌شود.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه اجرت‌المثل ایام زندگی مشترک</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">زوجه می‌تواند بابت کارهایی که در خانه شوهر به دستور وی انجام داده، تقاضای اجرت‌المثل کند.</p></div>
                 </div>
-
                 <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
                     <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">قوانین جدید مهریه و حبس‌زدایی</h4></div>
                     <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">تا زمانی که اعسار زوج ثابت نشده یا مالی از وی شناسایی نشود، صرف عدم پرداخت مهریه منجر به بازداشت فوری نمی‌گردد.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">مسئولیت کیفری چک‌های امانت یا تضمینی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اگر اثبات شود چک به عنوان امانت داده شده و دارنده با سوءنیت آن را به اجرا گذاشته، صادرکننده می‌تواند شکایت کیفری مطرح کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">حق طلاق زن در صورت اعتیاد یا محکومیت قطعی شوهر</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">اعتیاد مضر زوج یا محکومیت قطعی به حبس ۵ سال یا بیشتر، از مصادیق عسر و حرج بوده و دادگاه حکم طلاق صادر می‌کند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه تخلیه ملک تجاری با سرقفلی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">در صورت انتقال ملک به دیگری بدون اجازه مالک (تعدی و تفریط)، مالک می‌تواند تقاضای تخلیه نماید.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">شرایط قانونی انحصار وراثت و تقسیم ترکه</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از فوت متوفی، وراث با ارائه گواهی انحصار وراثت صادر شده از شورای حل اختلاف می‌توانند درخواست تقسیم ترکه نمایند.</p></div>
-                </div>
-
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-2 shadow-xl">
-                    <div class="flex items-start gap-2"><span class="text-amber-400 font-bold text-xs">❓</span><h4 class="text-xs font-bold text-slate-100">نحوه مطالبه دیه صدمات بدنی در تصادفات رانندگی</h4></div>
-                    <div class="flex items-start gap-2 pt-2 border-t border-slate-800/80"><span class="text-emerald-400 font-bold text-xs">💡</span><p class="text-[11px] text-slate-300 leading-relaxed">پس از تنظیم کروکی پلیس و معرفی به پزشکی قانونی جهت تعیین درصد صدمات، پرونده از طریق بیمه یا دادسرا پیگیری می‌شود.</p></div>
                 </div>
             </div>
         </div>
@@ -296,13 +267,32 @@
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytejiLRQlmAAMaLreGRgknaVpqYvyZouLonIl88iQUluGqMfIOP75ncP71aoSMJDTS/exec';
 
-        // پروکسی تصویر ایمن جهت نمایش صددرصدی تصاویر
+        // پروکسی قدرتمند تصویر برای بارگذاری صددرصدی عکس‌ها بدون مسدودسازی CORS
         function fixImgUrl(url) {
             if (!url || url.length < 5) return '';
             let validUrl = url;
             if (url.startsWith('//')) validUrl = 'https:' + url;
             else if (url.startsWith('/')) validUrl = 'https://www.mizanonline.ir' + url;
-            return 'https://images.weserv.nl/?url=' + encodeURIComponent(validUrl);
+            return 'https://images.weserv.nl/?url=' + encodeURIComponent(validUrl) + '&w=400&h=300&fit=cover';
+        }
+
+        // سیستم تغییر تم (تاریک و روشن)
+        function toggleTheme() {
+            const body = document.getElementById('app-body');
+            const btn = document.getElementById('theme-toggle-btn');
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                body.style.backgroundColor = '#f1f5f9';
+                body.style.color = '#0f172a';
+                btn.innerText = "🌙 تم تاریک";
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                body.style.backgroundColor = '#030508';
+                body.style.color = '#f8fafc';
+                btn.innerText = "☀️ تم روشن";
+            }
         }
 
         async function loadTab(tab, forceRefresh = false) {
@@ -361,7 +351,6 @@
             const container = document.getElementById('news-section');
             container.innerHTML = '';
             
-            // اگر تب پیوندها بود، استایل کارت‌های جذاب و هایپرلینک شده نمایش داده شود
             if (currentTab === 'links') {
                 renderLinksCards(container, currentItems);
                 return;
@@ -371,13 +360,13 @@
         }
 
         function renderLinksCards(container, items) {
-            let html = `<div class="space-y-3"><h3 class="text-xs font-bold text-cyan-400 px-1 mb-2">🔗 پیوندها و سامانه های رسمی قوه قضائیه</h3>`;
+            let html = `<div class="space-y-3"><h3 class="text-xs font-bold text-cyan-400 px-1 mb-2">🔗 پیوندها و سامانه‌های رسمی قوه قضائیه (مشاهده مستقیم)</h3>`;
             items.forEach(item => {
                 html += `
                     <a href="${item.link}" target="_blank" class="block bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-400 rounded-2xl p-4 shadow-xl transition-all group">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">${item.title}</span>
-                            <span class="text-cyan-400 text-xs">🔗 ورود به سامانه</span>
+                            <span class="text-cyan-400 text-xs font-mono">ورود به سامانه ↗</span>
                         </div>
                         <p class="text-[10px] text-slate-400 mt-1">${item.contentSnippet}</p>
                     </a>
@@ -471,7 +460,7 @@
             window.scrollTo(0, 0);
         }
 
-        // پخش صوتی کاملاً اصلاح‌شده با پشتیبانی کامل از مرورگرها
+        // پخش صوتی تیتر و لید
         function toggleSpeech() {
             const btn = document.getElementById('speech-btn');
             if (!('speechSynthesis' in window)) { alert('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند.'); return; }
@@ -610,7 +599,7 @@
             renderContent();
         }
 
-        // فعال‌سازی اسکرول بی‌نهایت روان برای بارگذاری اخبار بیشتر
+        // اسکرول بی‌نهایت روان برای بارگذاری موارد بیشتر
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 400) {
                 if (['lawyer', 'bookmarks', 'archive', 'calculator', 'quiz', 'services', 'links'].indexOf(currentTab) === -1 && currentItems.length > displayedCount) {
